@@ -8,5 +8,8 @@ namespace DDB.Banking.BL.Models
 {
     public class Withdrawal
     {
+        public int WithdrawalId { get; set; }
+        public double WithdrawalAmount { get; set; }
+        public DateTime WithdrawalDate { get; set; }
     }
 }

@@ -8,5 +8,8 @@ namespace DDB.Banking.BL.Models
 {
     public class Deposit
     {
+        public int DepositId { get; set; }
+        public double DepositAmount { get; set; }
+        public DateTime DepositeDate { get; set; }
     }
 }

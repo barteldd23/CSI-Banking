@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace DDB.Banking.BL.Models
 {
-    public class Customer
+    public class Customer : Person
     {
+        public int Id { get; set; }
+        public  List<Deposit> Deposits { get; set; }
+        public List<Withdrawal> Withdrawals { get; set; }
     }
 }
