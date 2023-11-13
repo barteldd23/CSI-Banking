@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DDB.Banking.BL.Models\DDB.Banking.BL.Models.csproj" />
+  </ItemGroup>
+
 </Project>
