@@ -49,8 +49,11 @@
             lblWithdrawals = new Label();
             dgvWithdrawals = new DataGridView();
             btnExit = new Button();
+            statusStrip1 = new StatusStrip();
+            lblStatus = new ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)dgvDeposits).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvWithdrawals).BeginInit();
+            statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // lbxCustomers
@@ -61,6 +64,7 @@
             lbxCustomers.Name = "lbxCustomers";
             lbxCustomers.Size = new Size(321, 184);
             lbxCustomers.TabIndex = 0;
+            lbxCustomers.SelectedIndexChanged += lbxCustomers_SelectedIndexChanged;
             // 
             // lblCustomers
             // 
@@ -240,11 +244,27 @@
             btnExit.UseVisualStyleBackColor = true;
             btnExit.Click += btnExit_Click;
             // 
+            // statusStrip1
+            // 
+            statusStrip1.Items.AddRange(new ToolStripItem[] { lblStatus });
+            statusStrip1.Location = new Point(0, 646);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new Size(658, 22);
+            statusStrip1.TabIndex = 22;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // lblStatus
+            // 
+            lblStatus.Name = "lblStatus";
+            lblStatus.Size = new Size(38, 17);
+            lblStatus.Text = "status";
+            // 
             // frmBanking
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(658, 668);
+            Controls.Add(statusStrip1);
             Controls.Add(btnExit);
             Controls.Add(btnEditWithdrawal);
             Controls.Add(btnAddWithdrawal);
@@ -269,8 +289,11 @@
             Name = "frmBanking";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Customer Information";
+            Load += frmBanking_Load;
             ((System.ComponentModel.ISupportInitialize)dgvDeposits).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvWithdrawals).EndInit();
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -298,5 +321,7 @@
         private Label lblWithdrawals;
         private DataGridView dgvWithdrawals;
         private Button btnExit;
+        private StatusStrip statusStrip1;
+        private ToolStripStatusLabel lblStatus;
     }
 }

@@ -19,6 +19,8 @@ namespace DDB.Banking.BL
             customer.Withdrawals = WithdrawalManager.Populate(customer.Id);
             customers.Add(customer);
 
+            customer = new Customer();
+
             customer.Id = 2;
             customer.FirstName = "Morty";
             customer.LastName = "Smith";
@@ -27,6 +29,8 @@ namespace DDB.Banking.BL
             customer.Deposits = DepositManager.Populate(customer.Id);
             customer.Withdrawals = WithdrawalManager.Populate(customer.Id);
             customers.Add(customer);
+
+            customer = new Customer();
 
             customer.Id = 3;
             customer.FirstName = "Snow";
