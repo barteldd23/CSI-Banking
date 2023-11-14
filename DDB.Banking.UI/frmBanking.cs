@@ -19,9 +19,21 @@ namespace DDB.Banking.UI
 
         private void frmBanking_Load(object sender, EventArgs e)
         {
-            lblStatus.Text = string.Empty;
-            customers = CustomerManager.Populate();
-            Refresh();
+            try
+            {
+                lblStatus.ForeColor = Color.Blue;
+                lblStatus.Text = string.Empty;
+
+                customers = CustomerManager.Populate();
+                Refresh();
+
+                lblStatus.Text = customers.Count.ToString() + " customers loaded...";
+            }
+            catch (Exception ex)
+            {
+                lblStatus.ForeColor = Color.Red;
+                lblStatus.Text = ex.Message;
+            }
         }
 
         private void Refresh()
@@ -36,7 +48,7 @@ namespace DDB.Banking.UI
         {
             try
             {
-                lblStatus.ForeColor = Color.Black;
+                lblStatus.ForeColor = Color.Blue;
                 lblStatus.Text = string.Empty;
 
                 if (lbxCustomers.SelectedIndex >= 0)
@@ -65,7 +77,7 @@ namespace DDB.Banking.UI
         {
             try
             {
-                lblStatus.ForeColor = Color.Black;
+                lblStatus.ForeColor = Color.Blue;
                 lblStatus.Text = string.Empty;
             }
             catch (Exception ex)
@@ -79,7 +91,7 @@ namespace DDB.Banking.UI
         {
             try
             {
-                lblStatus.ForeColor = Color.Black;
+                lblStatus.ForeColor = Color.Blue;
                 lblStatus.Text = string.Empty;
             }
             catch (Exception ex)
