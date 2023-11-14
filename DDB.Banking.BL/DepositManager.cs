@@ -22,10 +22,14 @@ namespace DDB.Banking.BL
                     deposit.DepositeDate = new DateTime(2023, 1,15);
                     deposits.Add(deposit);
 
+                    deposit = new Deposit();
+
                     deposit.DepositId = 2;
                     deposit.DepositAmount = 575.95;
                     deposit.DepositeDate = new DateTime(2023, 6, 23);
                     deposits.Add(deposit);
+
+                    deposit = new Deposit();
 
                     deposit.DepositId = 3;
                     deposit.DepositAmount = 1111.01;
@@ -39,6 +43,8 @@ namespace DDB.Banking.BL
                     deposit.DepositeDate = new DateTime(2023, 3, 5);
                     deposits.Add(deposit);
 
+                    deposit = new Deposit();
+
                     deposit.DepositId = 2;
                     deposit.DepositAmount = 15000.65;
                     deposit.DepositeDate = new DateTime(2023, 7, 20);
@@ -50,6 +56,8 @@ namespace DDB.Banking.BL
                     deposit.DepositAmount = 1000000;
                     deposit.DepositeDate = new DateTime(2023, 8, 23);
                     deposits.Add(deposit);
+
+                    deposit = new Deposit();
 
                     deposit.DepositId = 2;
                     deposit.DepositAmount = 1.01;

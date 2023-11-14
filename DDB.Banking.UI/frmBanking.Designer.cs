@@ -164,8 +164,10 @@
             // 
             dgvDeposits.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvDeposits.Location = new Point(12, 265);
+            dgvDeposits.MultiSelect = false;
             dgvDeposits.Name = "dgvDeposits";
             dgvDeposits.RowTemplate.Height = 25;
+            dgvDeposits.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvDeposits.Size = new Size(604, 150);
             dgvDeposits.TabIndex = 13;
             // 
@@ -187,6 +189,7 @@
             btnAddDeposit.TabIndex = 15;
             btnAddDeposit.Text = "Add Deposit";
             btnAddDeposit.UseVisualStyleBackColor = true;
+            btnAddDeposit.Click += btnAddDeposit_Click;
             // 
             // btnEditDeposit
             // 
@@ -229,8 +232,10 @@
             // 
             dgvWithdrawals.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvWithdrawals.Location = new Point(12, 465);
+            dgvWithdrawals.MultiSelect = false;
             dgvWithdrawals.Name = "dgvWithdrawals";
             dgvWithdrawals.RowTemplate.Height = 25;
+            dgvWithdrawals.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvWithdrawals.Size = new Size(604, 150);
             dgvWithdrawals.TabIndex = 17;
             // 

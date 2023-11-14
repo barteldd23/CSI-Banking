@@ -29,6 +29,8 @@ namespace DDB.Banking.BL
                     withdrawal.WithdrawalDate = new DateTime(2023, 2, 18);
                     withdrawals.Add(withdrawal);
 
+                    withdrawal = new Withdrawal();
+
                     withdrawal.WithdrawalId = 2;
                     withdrawal.WithdrawalAmount = 1000.01;
                     withdrawal.WithdrawalDate = new DateTime(2023, 4, 5);
@@ -41,10 +43,14 @@ namespace DDB.Banking.BL
                     withdrawal.WithdrawalDate = new DateTime(2023, 9, 1);
                     withdrawals.Add(withdrawal);
 
+                    withdrawal = new Withdrawal();
+
                     withdrawal.WithdrawalId = 2;
                     withdrawal.WithdrawalAmount = 10000;
                     withdrawal.WithdrawalDate = new DateTime(2023, 10, 1);
                     withdrawals.Add(withdrawal);
+
+                    withdrawal = new Withdrawal();
 
                     withdrawal.WithdrawalId = 3;
                     withdrawal.WithdrawalAmount = 100000;

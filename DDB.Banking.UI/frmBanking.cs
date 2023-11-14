@@ -61,24 +61,10 @@ namespace DDB.Banking.UI
                     txtId.Text = customer.Id.ToString();
                     dtpDOB.Value = customer.BirthDate;
 
-                    RefreshDeposits(customer);
-                    RefreshWithdrawals(customer);
+                    RefreshDeposits(customer.Deposits);
+                    RefreshWithdrawals(customer.Withdrawals);
                 }
 
-            }
-            catch (Exception ex)
-            {
-                lblStatus.ForeColor = Color.Red;
-                lblStatus.Text = ex.Message; 
-            }
-        }
-
-        public void RefreshDeposits(Customer customer)
-        {
-            try
-            {
-                lblStatus.ForeColor = Color.Blue;
-                lblStatus.Text = string.Empty;
             }
             catch (Exception ex)
             {
@@ -87,12 +73,60 @@ namespace DDB.Banking.UI
             }
         }
 
-        public void RefreshWithdrawals(Customer customer)
+        public void RefreshDeposits(List<Deposit> deposits)
         {
             try
             {
                 lblStatus.ForeColor = Color.Blue;
                 lblStatus.Text = string.Empty;
+
+                dgvDeposits.DataSource = deposits;
+                dgvDeposits.Columns[1].DefaultCellStyle.Format = "C";
+
+
+            }
+            catch (Exception ex)
+            {
+                lblStatus.ForeColor = Color.Red;
+                lblStatus.Text = ex.Message;
+            }
+        }
+
+        public void RefreshWithdrawals(List<Withdrawal> withdrawals)
+        {
+            try
+            {
+                lblStatus.ForeColor = Color.Blue;
+                lblStatus.Text = string.Empty;
+
+                dgvWithdrawals.DataSource = withdrawals;
+                dgvWithdrawals.Columns[1].DefaultCellStyle.Format = "C";
+            }
+            catch (Exception ex)
+            {
+                lblStatus.ForeColor = Color.Red;
+                lblStatus.Text = ex.Message;
+            }
+        }
+
+        private void btnAddDeposit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lblStatus.ForeColor = Color.Blue;
+                lblStatus.Text = string.Empty;
+
+                frmDeposit frmDeposit = new frmDeposit(ScreenMode.Add);
+                Customer selectedCustomer = lbxCustomers.SelectedItem as Customer;
+                frmDeposit.customer = selectedCustomer;
+
+                frmDeposit.ShowDialog();
+
+                //var row = dgvDeposits.SelectedRows[0];
+                //Deposit selectedDeposit = row.DataBoundItem as Deposit;
+
+                //frmDeposit.deposit = selectedDeposit;
+
             }
             catch (Exception ex)
             {
