@@ -2,6 +2,13 @@ using DDB.Banking.BL;
 using DDB.Banking.BL.Models;
 using Microsoft.VisualBasic.Devices;
 
+
+/*
+ * Dean Bartel
+ * 14 Nov 2023
+ * Banking #5
+ */
+
 namespace DDB.Banking.UI
 {
     public partial class frmBanking : Form
@@ -17,6 +24,8 @@ namespace DDB.Banking.UI
             Close();
         }
 
+
+        // On Load: Get the list of customers and display them in the listbox with Refresh() function.
         private void frmBanking_Load(object sender, EventArgs e)
         {
             try
@@ -44,6 +53,9 @@ namespace DDB.Banking.UI
 
         }
 
+
+        // When a customer is selected in the listbox: Display their info on the txtboxes.
+        // populate their deposts and withdrawals in the data grid views using RefreshDeposits(List<deposit>) RefreshWithdrawals(List<withdrawal>) functions
         private void lbxCustomers_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -53,6 +65,7 @@ namespace DDB.Banking.UI
 
                 if (lbxCustomers.SelectedIndex >= 0)
                 {
+                    // lbx.SelectedItem can grab the entier Customer Object and insert its data into this customer variable object.
                     Customer customer = lbxCustomers.SelectedItem as Customer;
                     txtFirstName.Text = customer.FirstName;
                     txtLastName.Text = customer.LastName;
@@ -80,8 +93,11 @@ namespace DDB.Banking.UI
                 lblStatus.ForeColor = Color.Blue;
                 lblStatus.Text = string.Empty;
 
+                //Need =null to reset the dgv. format amounts to curencty and dates to mm/dd/yyyy
+                dgvDeposits.DataSource = null;
                 dgvDeposits.DataSource = deposits;
                 dgvDeposits.Columns[1].DefaultCellStyle.Format = "C";
+                dgvDeposits.Columns[2].DefaultCellStyle.Format = "MM/dd/yyyy";
 
 
             }
@@ -99,8 +115,11 @@ namespace DDB.Banking.UI
                 lblStatus.ForeColor = Color.Blue;
                 lblStatus.Text = string.Empty;
 
+                //Need =null to reset the dgv. format amounts to curencty and dates to mm/dd/yyyy
+                dgvWithdrawals.DataSource = null;
                 dgvWithdrawals.DataSource = withdrawals;
                 dgvWithdrawals.Columns[1].DefaultCellStyle.Format = "C";
+                dgvWithdrawals.Columns[2].DefaultCellStyle.Format = "MM/dd/yyyy";
             }
             catch (Exception ex)
             {
@@ -109,6 +128,8 @@ namespace DDB.Banking.UI
             }
         }
 
+
+        // on Add Click: declare a new form. set Mode and current Customer Properties.
         private void btnAddDeposit_Click(object sender, EventArgs e)
         {
             try
@@ -116,7 +137,7 @@ namespace DDB.Banking.UI
                 lblStatus.ForeColor = Color.Blue;
                 lblStatus.Text = string.Empty;
 
-                frmDeposit frmDeposit = new frmDeposit(ScreenMode.Add);
+                frmDeposit frmDeposit = new frmDeposit(DepositMode.Add);
                 Customer selectedCustomer = lbxCustomers.SelectedItem as Customer;
                 frmDeposit.customer = selectedCustomer;
 
@@ -128,6 +149,86 @@ namespace DDB.Banking.UI
                 //Deposit selectedDeposit = row.DataBoundItem as Deposit;
 
                 //frmDeposit.deposit = selectedDeposit;
+
+            }
+            catch (Exception ex)
+            {
+                lblStatus.ForeColor = Color.Red;
+                lblStatus.Text = ex.Message;
+            }
+        }
+
+        // on Edit Click: declare a new form. set Mode and current Customer Properties. Set selected index to populate the form with data.
+        private void btnEditDeposit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lblStatus.ForeColor = Color.Blue;
+                lblStatus.Text = string.Empty;
+
+                frmDeposit frmDeposit = new frmDeposit(DepositMode.Edit);
+                Customer selectedCustomer = lbxCustomers.SelectedItem as Customer;
+                frmDeposit.customer = selectedCustomer;
+                frmDeposit.depositIndex = dgvDeposits.CurrentRow.Index;
+
+                frmDeposit.ShowDialog();
+
+                RefreshDeposits(selectedCustomer.Deposits);
+
+                //var row = dgvDeposits.SelectedRows[0];
+                //Deposit selectedDeposit = row.DataBoundItem as Deposit;
+
+                //frmDeposit.deposit = selectedDeposit;
+
+            }
+            catch (Exception ex)
+            {
+                lblStatus.ForeColor = Color.Red;
+                lblStatus.Text = ex.Message;
+            }
+        }
+
+        // on Add Click: declare a new form. set Mode and current Customer Properties.
+        private void btnAddWithdrawal_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lblStatus.ForeColor = Color.Blue;
+                lblStatus.Text = string.Empty;
+
+                frmWithdrawal frmWithdrawal = new frmWithdrawal(WithdrawalMode.Add);
+                Customer selectedCustomer = lbxCustomers.SelectedItem as Customer;
+                frmWithdrawal.customer = selectedCustomer;
+
+                frmWithdrawal.ShowDialog();
+
+                RefreshWithdrawals(selectedCustomer.Withdrawals);
+
+
+            }
+            catch (Exception ex)
+            {
+                lblStatus.ForeColor = Color.Red;
+                lblStatus.Text = ex.Message;
+            }
+        }
+
+        // on Edit Click: declare a new form. set Mode and current Customer Properties. Set selected index to populate the form with data.
+        private void btnEditWithdrawal_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lblStatus.ForeColor = Color.Blue;
+                lblStatus.Text = string.Empty;
+
+                frmWithdrawal frmWithdrawal = new frmWithdrawal(WithdrawalMode.Edit);
+                Customer selectedCustomer = lbxCustomers.SelectedItem as Customer;
+                frmWithdrawal.customer = selectedCustomer;
+                frmWithdrawal.withdrawalIndex = dgvWithdrawals.CurrentRow.Index;
+
+                frmWithdrawal.ShowDialog();
+
+                RefreshWithdrawals(selectedCustomer.Withdrawals);
 
             }
             catch (Exception ex)

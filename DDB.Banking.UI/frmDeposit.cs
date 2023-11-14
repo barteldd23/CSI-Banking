@@ -12,31 +12,35 @@ using System.Windows.Forms;
 
 namespace DDB.Banking.UI
 {
-    public enum ScreenMode
+
+    public enum DepositMode
     {
         Add = 0,
         Edit
     }
     public partial class frmDeposit : Form
     {
-        private ScreenMode screenMode;
+
+        //properties to be set before the form loads on the screen.
+        private DepositMode depositMode;
 
         public Customer customer { get; set; }
 
+        // Index is only needed if Editing
         public int depositIndex { get; set; }
 
 
-        public frmDeposit(ScreenMode screenMode)
+        public frmDeposit(DepositMode depositMode)
         {
             InitializeComponent();
-            this.screenMode = screenMode;
-            this.Text = screenMode.ToString() + " Deposit";
+            this.depositMode = depositMode;
+            this.Text = depositMode.ToString() + " Deposit";
         }
 
         private void frmDeposit_Load(object sender, EventArgs e)
         {
             lblCustomer.Text = customer.FullName;
-            if (screenMode == ScreenMode.Add)
+            if (depositMode == DepositMode.Add)
             {
                 lblHeading.Text = "Add New Deposit";
             }
@@ -49,6 +53,7 @@ namespace DDB.Banking.UI
             }
         }
 
+        // Check if valid amount. If so, update the customer objects data by adding a new or editing current selection.
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
@@ -58,7 +63,7 @@ namespace DDB.Banking.UI
                 {
                     if (depositValue > 0)
                     {
-                        if(screenMode == ScreenMode.Add)
+                        if(depositMode == DepositMode.Add)
                         {
                             Deposit deposit = new Deposit();
                             deposit.DepositAmount = depositValue;
@@ -87,7 +92,7 @@ namespace DDB.Banking.UI
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
     }

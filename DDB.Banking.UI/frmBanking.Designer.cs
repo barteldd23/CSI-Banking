@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             lbxCustomers = new ListBox();
             lblCustomers = new Label();
             lblFirstName = new Label();
@@ -162,10 +164,16 @@
             // 
             // dgvDeposits
             // 
+            dgvDeposits.AllowUserToAddRows = false;
+            dgvDeposits.AllowUserToDeleteRows = false;
+            dgvDeposits.AllowUserToOrderColumns = true;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(255, 255, 128);
+            dgvDeposits.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dgvDeposits.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvDeposits.Location = new Point(12, 265);
             dgvDeposits.MultiSelect = false;
             dgvDeposits.Name = "dgvDeposits";
+            dgvDeposits.ReadOnly = true;
             dgvDeposits.RowTemplate.Height = 25;
             dgvDeposits.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvDeposits.Size = new Size(604, 150);
@@ -199,6 +207,7 @@
             btnEditDeposit.TabIndex = 16;
             btnEditDeposit.Text = "Edit Deposit";
             btnEditDeposit.UseVisualStyleBackColor = true;
+            btnEditDeposit.Click += btnEditDeposit_Click;
             // 
             // btnEditWithdrawal
             // 
@@ -208,6 +217,7 @@
             btnEditWithdrawal.TabIndex = 20;
             btnEditWithdrawal.Text = "Edit Withdrawal";
             btnEditWithdrawal.UseVisualStyleBackColor = true;
+            btnEditWithdrawal.Click += btnEditWithdrawal_Click;
             // 
             // btnAddWithdrawal
             // 
@@ -217,6 +227,7 @@
             btnAddWithdrawal.TabIndex = 19;
             btnAddWithdrawal.Text = "Add Withdrawal";
             btnAddWithdrawal.UseVisualStyleBackColor = true;
+            btnAddWithdrawal.Click += btnAddWithdrawal_Click;
             // 
             // lblWithdrawals
             // 
@@ -230,10 +241,13 @@
             // 
             // dgvWithdrawals
             // 
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(255, 255, 128);
+            dgvWithdrawals.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             dgvWithdrawals.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvWithdrawals.Location = new Point(12, 465);
             dgvWithdrawals.MultiSelect = false;
             dgvWithdrawals.Name = "dgvWithdrawals";
+            dgvWithdrawals.ReadOnly = true;
             dgvWithdrawals.RowTemplate.Height = 25;
             dgvWithdrawals.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvWithdrawals.Size = new Size(604, 150);
@@ -252,9 +266,9 @@
             // statusStrip1
             // 
             statusStrip1.Items.AddRange(new ToolStripItem[] { lblStatus });
-            statusStrip1.Location = new Point(0, 646);
+            statusStrip1.Location = new Point(0, 658);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(658, 22);
+            statusStrip1.Size = new Size(657, 22);
             statusStrip1.TabIndex = 22;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -268,7 +282,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(658, 668);
+            ClientSize = new Size(657, 680);
             Controls.Add(statusStrip1);
             Controls.Add(btnExit);
             Controls.Add(btnEditWithdrawal);
