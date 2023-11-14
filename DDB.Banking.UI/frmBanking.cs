@@ -69,7 +69,7 @@ namespace DDB.Banking.UI
             catch (Exception ex)
             {
                 lblStatus.ForeColor = Color.Red;
-                lblStatus.Text = ex.Message;
+                lblStatus.Text = ex.Message; 
             }
         }
 
