@@ -122,6 +122,8 @@ namespace DDB.Banking.UI
 
                 frmDeposit.ShowDialog();
 
+                RefreshDeposits(selectedCustomer.Deposits);
+
                 //var row = dgvDeposits.SelectedRows[0];
                 //Deposit selectedDeposit = row.DataBoundItem as Deposit;
 

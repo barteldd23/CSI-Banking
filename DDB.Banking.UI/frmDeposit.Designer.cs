@@ -98,6 +98,7 @@
             btnSave.TabIndex = 18;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
             // frmDeposit
             // 

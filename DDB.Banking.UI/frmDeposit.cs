@@ -1,4 +1,5 @@
 ﻿using DDB.Banking.BL.Models;
+using Microsoft.VisualBasic.Devices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -45,6 +46,48 @@ namespace DDB.Banking.UI
                 txtDepositAmount.Text = customer.Deposits[depositIndex].DepositAmount.ToString();
                 dtpDepositDate.Value = customer.Deposits[depositIndex].DepositeDate;
 
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                double depositValue;
+                if(double.TryParse(txtDepositAmount.Text, out depositValue))
+                {
+                    if (depositValue > 0)
+                    {
+                        if(screenMode == ScreenMode.Add)
+                        {
+                            Deposit deposit = new Deposit();
+                            deposit.DepositAmount = depositValue;
+                            deposit.DepositeDate = dtpDepositDate.Value;
+                            deposit.DepositId = customer.Deposits.Any() ? customer.Deposits.Max(d => d.DepositId) + 1 : 1;
+
+                            customer.Deposits.Add(deposit);
+                        }
+                        else
+                        {
+                            customer.Deposits[depositIndex].DepositAmount = depositValue;
+                            customer.Deposits[depositIndex].DepositeDate = dtpDepositDate.Value;
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Not a valid deposit.");
+                    }
+                }
+                else
+                {
+                    throw new Exception("Not a valid deposit.");
+                }
+
+                this.Close(); 
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
         }
     }
