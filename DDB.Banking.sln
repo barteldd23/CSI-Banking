@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDB.Banking.UI", "DDB.Banking.UI\DDB.Banking.UI.csproj", "{8DC09E51-A529-4790-BB5F-59862592B96A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDB.Banking.UI", "DDB.Banking.UI\DDB.Banking.UI.csproj", "{8DC09E51-A529-4790-BB5F-59862592B96A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDB.Banking.BL", "DDB.Banking.BL\DDB.Banking.BL.csproj", "{51136DCB-C77D-4B68-B903-5CA1928375DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDB.Banking.BL", "DDB.Banking.BL\DDB.Banking.BL.csproj", "{51136DCB-C77D-4B68-B903-5CA1928375DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDB.Banking.BL.Models", "DDB.Banking.BL.Models\DDB.Banking.BL.Models.csproj", "{DF17BA23-AC06-4C35-8FA9-CC0EA989A056}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDB.Banking.BL.Models", "DDB.Banking.BL.Models\DDB.Banking.BL.Models.csproj", "{DF17BA23-AC06-4C35-8FA9-CC0EA989A056}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDB.Banking.BL.Test", "DDB.Banking.BL.Test\DDB.Banking.BL.Test.csproj", "{3D03F2AB-1026-4401-8EE8-406533D1FF1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDB.Banking.BL.Test", "DDB.Banking.BL.Test\DDB.Banking.BL.Test.csproj", "{3D03F2AB-1026-4401-8EE8-406533D1FF1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDB.Utility.PL", "DDB.Utility.PL\DDB.Utility.PL.csproj", "{3C0F2B12-2F16-412F-88E4-73BB701A9AE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDB.Banking.PL.Test", "DDB.Banking.PL.Test\DDB.Banking.PL.Test.csproj", "{1D29409E-3AF4-4441-8EAF-C2A291CFC7F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{3D03F2AB-1026-4401-8EE8-406533D1FF1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D03F2AB-1026-4401-8EE8-406533D1FF1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D03F2AB-1026-4401-8EE8-406533D1FF1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C0F2B12-2F16-412F-88E4-73BB701A9AE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C0F2B12-2F16-412F-88E4-73BB701A9AE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C0F2B12-2F16-412F-88E4-73BB701A9AE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C0F2B12-2F16-412F-88E4-73BB701A9AE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D29409E-3AF4-4441-8EAF-C2A291CFC7F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D29409E-3AF4-4441-8EAF-C2A291CFC7F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D29409E-3AF4-4441-8EAF-C2A291CFC7F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D29409E-3AF4-4441-8EAF-C2A291CFC7F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             lbxCustomers = new ListBox();
             lblCustomers = new Label();
             lblFirstName = new Label();
@@ -172,8 +172,8 @@
             dgvDeposits.AllowUserToAddRows = false;
             dgvDeposits.AllowUserToDeleteRows = false;
             dgvDeposits.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(255, 255, 128);
-            dgvDeposits.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(255, 255, 128);
+            dgvDeposits.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             dgvDeposits.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvDeposits.Location = new Point(12, 333);
             dgvDeposits.MultiSelect = false;
@@ -246,8 +246,8 @@
             // 
             // dgvWithdrawals
             // 
-            dataGridViewCellStyle4.BackColor = Color.FromArgb(255, 255, 128);
-            dgvWithdrawals.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle6.BackColor = Color.FromArgb(255, 255, 128);
+            dgvWithdrawals.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
             dgvWithdrawals.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvWithdrawals.Location = new Point(12, 533);
             dgvWithdrawals.MultiSelect = false;
@@ -291,6 +291,7 @@
             btnSave.TabIndex = 23;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
             // btnClear
             // 

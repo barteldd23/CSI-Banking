@@ -237,5 +237,53 @@ namespace DDB.Banking.UI
                 lblStatus.Text = ex.Message;
             }
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(txtFirstName.Text.Trim()))
+                {
+                    txtFirstName.Focus();
+                    txtFirstName.SelectAll();
+                    MessageBox.Show("Must enter a First Name");
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(txtLastName.Text.Trim()))
+                    {
+                        txtLastName.Focus();
+                        txtLastName.SelectAll();
+                        MessageBox.Show("Must enter a Last Name");
+                    }
+                    else
+                    {
+                        if (string.IsNullOrEmpty(txtSSN.Text.Trim()))
+                        {
+                            txtSSN.Focus();
+                            txtSSN.SelectAll();
+                            MessageBox.Show("Must enter a SSN");
+                        }
+                        else
+                        {
+                            if (dtpDOB.Value.CompareTo(DateTime.Now) >= 0)
+                            {
+                                dtpDOB.Focus();
+                                MessageBox.Show("Must enter a valid Birth Date");
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                lblStatus.ForeColor = Color.Red;
+                lblStatus.Text = ex.Message;
+            }
+        }
     }
 }
