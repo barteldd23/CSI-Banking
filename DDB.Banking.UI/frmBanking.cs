@@ -34,10 +34,36 @@ namespace DDB.Banking.UI
             {
                 settings = Program.Configuration.GetSection("MySettings").Get<MySettings>();
 
+                this.Text = settings.Text;
+
                 lblStatus.ForeColor = Color.Blue;
                 lblStatus.Text = string.Empty;
-
+                
+                //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                //~~~~~~~~~~~Create Default Data Files~~~~~~~~~~~~~~~~~~~
                 customers = CustomerManager.Populate();
+                List<Deposit> allDeposits = new List<Deposit>();
+                List<Withdrawal> allWithdrawals = new List<Withdrawal>();
+                foreach(Customer customer in customers)
+                {
+                    foreach(Deposit deposit in customer.Deposits)
+                    {
+                        allDeposits.Add(deposit);
+                    }
+                    foreach(Withdrawal withdrawal in customer.Withdrawals)
+                    {
+                        allWithdrawals.Add(withdrawal);
+                    }
+                }
+                CustomerManager.WriteXML(customers, settings.CustomerXMLFileName);
+                DepositManager.WriteXML(allDeposits, settings.DepositXMLFileName);
+                WithdrawalManager.WriteXML(allWithdrawals, settings.WithdrawalXMLFileName);
+                //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+                // Get Data by Reading the xml files
+                customers = CustomerManager.ReadXML(settings.CustomerXMLFileName);
+
                 Refresh();
 
                 lblStatus.Text = customers.Count.ToString() + " customers loaded...";
@@ -100,8 +126,9 @@ namespace DDB.Banking.UI
                 //Need =null to reset the dgv. format amounts to curencty and dates to mm/dd/yyyy
                 dgvDeposits.DataSource = null;
                 dgvDeposits.DataSource = deposits;
-                dgvDeposits.Columns[1].DefaultCellStyle.Format = "C";
-                dgvDeposits.Columns[2].DefaultCellStyle.Format = "MM/dd/yyyy";
+                dgvDeposits.Columns[1].Visible = false;
+                dgvDeposits.Columns[2].DefaultCellStyle.Format = "C";
+                dgvDeposits.Columns[3].DefaultCellStyle.Format = "MM/dd/yyyy";
 
 
             }
@@ -122,8 +149,9 @@ namespace DDB.Banking.UI
                 //Need =null to reset the dgv. format amounts to curencty and dates to mm/dd/yyyy
                 dgvWithdrawals.DataSource = null;
                 dgvWithdrawals.DataSource = withdrawals;
-                dgvWithdrawals.Columns[1].DefaultCellStyle.Format = "C";
-                dgvWithdrawals.Columns[2].DefaultCellStyle.Format = "MM/dd/yyyy";
+                dgvWithdrawals.Columns[1].Visible =false;
+                dgvWithdrawals.Columns[2].DefaultCellStyle.Format = "C";
+                dgvWithdrawals.Columns[3].DefaultCellStyle.Format = "MM/dd/yyyy";
             }
             catch (Exception ex)
             {
@@ -277,7 +305,7 @@ namespace DDB.Banking.UI
                             }
                             else
                             {
-
+                                // do the good stuff
                             }
                         }
                     }

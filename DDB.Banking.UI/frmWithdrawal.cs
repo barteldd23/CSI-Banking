@@ -62,6 +62,7 @@ namespace DDB.Banking.UI
                         if (withdrawalMode == WithdrawalMode.Add)
                         {
                             Withdrawal withdrawal = new Withdrawal();
+                            withdrawal.CustomerId = customer.Id;
                             withdrawal.WithdrawalAmount = withdrawalValue;
                             withdrawal.WithdrawalDate = dtpWithdrawalDate.Value;
                             withdrawal.WithdrawalId = customer.Withdrawals.Any() ? customer.Withdrawals.Max(d => d.WithdrawalId) + 1 : 1;

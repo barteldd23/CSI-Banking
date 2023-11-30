@@ -66,6 +66,7 @@ namespace DDB.Banking.UI
                         if(depositMode == DepositMode.Add)
                         {
                             Deposit deposit = new Deposit();
+                            deposit.CustomerId = customer.Id;
                             deposit.DepositAmount = depositValue;
                             deposit.DepositeDate = dtpDepositDate.Value;
                             deposit.DepositId = customer.Deposits.Any() ? customer.Deposits.Max(d => d.DepositId) + 1 : 1;

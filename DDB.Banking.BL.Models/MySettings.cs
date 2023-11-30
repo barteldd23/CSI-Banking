@@ -17,14 +17,6 @@ namespace DDB.Banking.BL.Models
             set { text = value; }
         }
 
-        private Color backColor;
-
-        public Color BackColor
-        {
-            get { return backColor; }
-            set { backColor = value; }
-        }
-
         private string customerXMLFileName;
 
         public string CustomerXMLFileName
@@ -32,6 +24,8 @@ namespace DDB.Banking.BL.Models
             get { return customerXMLFileName; }
             set { customerXMLFileName = value; }
         }
+        public string DepositXMLFileName { get; set; }
+        public string WithdrawalXMLFileName { get; set; }
 
 
 

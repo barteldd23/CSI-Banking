@@ -1,9 +1,11 @@
 ﻿using DDB.Banking.BL.Models;
+using DDB.Utility.PL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace DDB.Banking.BL
 {
@@ -18,6 +20,7 @@ namespace DDB.Banking.BL
             {
                 case 1: 
                     deposit.DepositId = 1;
+                    deposit.CustomerId = id;
                     deposit.DepositAmount = 1000;
                     deposit.DepositeDate = new DateTime(2023, 1,15);
                     deposits.Add(deposit);
@@ -25,6 +28,7 @@ namespace DDB.Banking.BL
                     deposit = new Deposit();
 
                     deposit.DepositId = 2;
+                    deposit.CustomerId = id;
                     deposit.DepositAmount = 575.95;
                     deposit.DepositeDate = new DateTime(2023, 6, 23);
                     deposits.Add(deposit);
@@ -32,6 +36,7 @@ namespace DDB.Banking.BL
                     deposit = new Deposit();
 
                     deposit.DepositId = 3;
+                    deposit.CustomerId = id;
                     deposit.DepositAmount = 1111.01;
                     deposit.DepositeDate = DateTime.Now;
                     deposits.Add(deposit);
@@ -39,6 +44,7 @@ namespace DDB.Banking.BL
 
                 case 2:
                     deposit.DepositId = 1;
+                    deposit.CustomerId = id;
                     deposit.DepositAmount = 431;
                     deposit.DepositeDate = new DateTime(2023, 3, 5);
                     deposits.Add(deposit);
@@ -46,6 +52,7 @@ namespace DDB.Banking.BL
                     deposit = new Deposit();
 
                     deposit.DepositId = 2;
+                    deposit.CustomerId = id;
                     deposit.DepositAmount = 15000.65;
                     deposit.DepositeDate = new DateTime(2023, 7, 20);
                     deposits.Add(deposit);
@@ -53,6 +60,7 @@ namespace DDB.Banking.BL
 
                 case 3:
                     deposit.DepositId = 1;
+                    deposit.CustomerId = id;
                     deposit.DepositAmount = 1000000;
                     deposit.DepositeDate = new DateTime(2023, 8, 23);
                     deposits.Add(deposit);
@@ -60,6 +68,7 @@ namespace DDB.Banking.BL
                     deposit = new Deposit();
 
                     deposit.DepositId = 2;
+                    deposit.CustomerId = id;
                     deposit.DepositAmount = 1.01;
                     deposit.DepositeDate = new DateTime(2023, 11, 11);
                     deposits.Add(deposit);
@@ -68,5 +77,7 @@ namespace DDB.Banking.BL
 
             return deposits;
         }
+
+        
     }
 }

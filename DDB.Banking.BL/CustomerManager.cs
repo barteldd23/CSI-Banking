@@ -65,7 +65,29 @@ namespace DDB.Banking.BL
                 throw;
             }
         }
-    }
 
+        public static List<Customer> ReadXML(string xmlfilepath)
+        {
+            try
+            {
+                List<Customer> computers = new List<Customer>();
+                XmlSerializer serializer = new XmlSerializer(typeof(List<Customer>));
+
+                TextReader reader = new StreamReader(xmlfilepath);
+
+                computers.AddRange((List<Customer>)serializer.Deserialize(reader));
+
+                reader.Close();
+                reader = null;
+                serializer = null;
+                return computers;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+    }
     
 }
