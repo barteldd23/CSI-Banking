@@ -38,19 +38,19 @@ namespace DDB.Banking.UI
 
                 lblStatus.ForeColor = Color.Blue;
                 lblStatus.Text = string.Empty;
-                
+
                 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                 //~~~~~~~~~~~Create Default Data Files~~~~~~~~~~~~~~~~~~~
                 customers = CustomerManager.Populate();
                 List<Deposit> allDeposits = new List<Deposit>();
                 List<Withdrawal> allWithdrawals = new List<Withdrawal>();
-                foreach(Customer customer in customers)
+                foreach (Customer customer in customers)
                 {
-                    foreach(Deposit deposit in customer.Deposits)
+                    foreach (Deposit deposit in customer.Deposits)
                     {
                         allDeposits.Add(deposit);
                     }
-                    foreach(Withdrawal withdrawal in customer.Withdrawals)
+                    foreach (Withdrawal withdrawal in customer.Withdrawals)
                     {
                         allWithdrawals.Add(withdrawal);
                     }
@@ -61,7 +61,7 @@ namespace DDB.Banking.UI
                 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-                
+
 
                 Refresh();
 
@@ -109,6 +109,10 @@ namespace DDB.Banking.UI
                     RefreshDeposits(customer.Deposits);
                     RefreshWithdrawals(customer.Withdrawals);
                 }
+                else
+                {
+                    ClearScreen();
+                }
 
             }
             catch (Exception ex)
@@ -116,6 +120,19 @@ namespace DDB.Banking.UI
                 lblStatus.ForeColor = Color.Red;
                 lblStatus.Text = ex.Message;
             }
+        }
+
+        private void ClearScreen()
+        {
+            txtFirstName.Text = string.Empty;
+            txtLastName.Text = string.Empty;
+            txtSSN.Text = string.Empty;
+            txtId.Text = string.Empty;
+            dtpDOB.Value = DateTime.Now;
+            List<Deposit> nullDeposits = null;
+            List<Withdrawal> nullWithdrawals = null;
+            RefreshDeposits(nullDeposits);
+            RefreshWithdrawals(nullWithdrawals);
         }
 
         public void RefreshDeposits(List<Deposit> deposits)
@@ -127,10 +144,14 @@ namespace DDB.Banking.UI
 
                 //Need =null to reset the dgv. format amounts to curencty and dates to mm/dd/yyyy
                 dgvDeposits.DataSource = null;
-                dgvDeposits.DataSource = deposits;
-                dgvDeposits.Columns[1].Visible = false;
-                dgvDeposits.Columns[2].DefaultCellStyle.Format = "C";
-                dgvDeposits.Columns[3].DefaultCellStyle.Format = "MM/dd/yyyy";
+                if (deposits != null)
+                {
+                    dgvDeposits.DataSource = deposits;
+                    dgvDeposits.Columns[1].Visible = false;
+                    dgvDeposits.Columns[2].DefaultCellStyle.Format = "C";
+                    dgvDeposits.Columns[3].DefaultCellStyle.Format = "MM/dd/yyyy";
+                }
+
 
 
             }
@@ -150,10 +171,15 @@ namespace DDB.Banking.UI
 
                 //Need =null to reset the dgv. format amounts to curencty and dates to mm/dd/yyyy
                 dgvWithdrawals.DataSource = null;
-                dgvWithdrawals.DataSource = withdrawals;
-                dgvWithdrawals.Columns[1].Visible =false;
-                dgvWithdrawals.Columns[2].DefaultCellStyle.Format = "C";
-                dgvWithdrawals.Columns[3].DefaultCellStyle.Format = "MM/dd/yyyy";
+
+                if (withdrawals != null)
+                {
+                    dgvWithdrawals.DataSource = withdrawals;
+                    dgvWithdrawals.Columns[1].Visible = false;
+                    dgvWithdrawals.Columns[2].DefaultCellStyle.Format = "C";
+                    dgvWithdrawals.Columns[3].DefaultCellStyle.Format = "MM/dd/yyyy";
+                }
+
             }
             catch (Exception ex)
             {
@@ -324,6 +350,54 @@ namespace DDB.Banking.UI
             {
                 lblStatus.ForeColor = Color.Red;
                 lblStatus.Text = ex.Message;
+            }
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            lbxCustomers.SelectedIndex = -1;
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            // Only Add if Id is empty, other wise they might mean edit.
+            if (string.IsNullOrEmpty(txtId.Text))
+            {
+                Customer customer = new Customer();
+                customer.FirstName = txtFirstName.Text;
+                customer.LastName = txtLastName.Text;
+                customer.SSN = txtSSN.Text;
+                customer.BirthDate = dtpDOB.Value;
+                customer.Id = customers.Max(x => x.Id) + 1;
+
+                customers.Add(customer);
+                CustomerManager.WriteXML(customers, settings.CustomerXMLFileName);
+
+                Refresh();
+            }
+            else
+            {
+                MessageBox.Show("Did you mean Save? Clear the screen If you want to Add New Customer");
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtId.Text))
+            {
+                MessageBox.Show("You must select a customer to Delete");
+            }
+            else
+            {
+                Customer customer = lbxCustomers.SelectedItem as Customer;
+                DialogResult result = MessageBox.Show("Delete " + customer.FullName + " ?", "Are You sure?", MessageBoxButtons.YesNo);
+                if( result== DialogResult.Yes)
+                {
+                    customers.RemoveAt(lbxCustomers.SelectedIndex);
+                    CustomerManager.WriteXML(customers, settings.CustomerXMLFileName);
+                    Refresh();
+                }
+                
             }
         }
     }

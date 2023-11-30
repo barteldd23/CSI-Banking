@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             lbxCustomers = new ListBox();
             lblCustomers = new Label();
             lblFirstName = new Label();
@@ -172,8 +172,8 @@
             dgvDeposits.AllowUserToAddRows = false;
             dgvDeposits.AllowUserToDeleteRows = false;
             dgvDeposits.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle5.BackColor = Color.FromArgb(255, 255, 128);
-            dgvDeposits.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(255, 255, 128);
+            dgvDeposits.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dgvDeposits.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvDeposits.Location = new Point(12, 333);
             dgvDeposits.MultiSelect = false;
@@ -246,8 +246,8 @@
             // 
             // dgvWithdrawals
             // 
-            dataGridViewCellStyle6.BackColor = Color.FromArgb(255, 255, 128);
-            dgvWithdrawals.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(255, 255, 128);
+            dgvWithdrawals.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             dgvWithdrawals.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvWithdrawals.Location = new Point(12, 533);
             dgvWithdrawals.MultiSelect = false;
@@ -301,6 +301,7 @@
             btnClear.TabIndex = 24;
             btnClear.Text = "Clear";
             btnClear.UseVisualStyleBackColor = true;
+            btnClear.Click += btnClear_Click;
             // 
             // btnDelete
             // 
@@ -310,6 +311,7 @@
             btnDelete.TabIndex = 25;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnAdd
             // 
@@ -319,6 +321,7 @@
             btnAdd.TabIndex = 26;
             btnAdd.Text = "Add";
             btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
             // 
             // btnWriteToFile
             // 
