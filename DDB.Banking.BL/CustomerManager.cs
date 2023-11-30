@@ -1,4 +1,6 @@
 ﻿using DDB.Banking.BL.Models;
+using System.Xml.Serialization;
+using DDB.Utility.PL;
 
 namespace DDB.Banking.BL
 {
@@ -43,5 +45,27 @@ namespace DDB.Banking.BL
 
             return customers;
         }
+
+        public static bool WriteXML(List<Customer> customers, string filePath)
+        {
+            try
+            {
+                FileIO.Delete(filePath);
+
+                XmlSerializer serializer = new XmlSerializer(typeof(List<Customer>));
+                TextWriter writer = new StreamWriter(filePath);
+                serializer.Serialize(writer, customers);
+                writer.Close();
+                writer = null;
+                serializer = null;
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
+
+    
 }

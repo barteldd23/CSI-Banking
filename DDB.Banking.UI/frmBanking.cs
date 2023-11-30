@@ -1,6 +1,7 @@
 using DDB.Banking.BL;
 using DDB.Banking.BL.Models;
 using Microsoft.VisualBasic.Devices;
+using Microsoft.Extensions.Configuration;
 
 
 /*
@@ -14,6 +15,7 @@ namespace DDB.Banking.UI
     public partial class frmBanking : Form
     {
         List<Customer> customers;
+        MySettings settings;
         public frmBanking()
         {
             InitializeComponent();
@@ -30,6 +32,8 @@ namespace DDB.Banking.UI
         {
             try
             {
+                settings = Program.Configuration.GetSection("MySettings").Get<MySettings>();
+
                 lblStatus.ForeColor = Color.Blue;
                 lblStatus.Text = string.Empty;
 
