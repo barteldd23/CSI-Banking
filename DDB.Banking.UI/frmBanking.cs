@@ -56,13 +56,12 @@ namespace DDB.Banking.UI
                     }
                 }
                 CustomerManager.WriteXML(customers, settings.CustomerXMLFileName);
-                DepositManager.WriteXML(allDeposits, settings.DepositXMLFileName);
-                WithdrawalManager.WriteXML(allWithdrawals, settings.WithdrawalXMLFileName);
+                //DepositManager.WriteXML(allDeposits, settings.DepositXMLFileName);
+                //WithdrawalManager.WriteXML(allWithdrawals, settings.WithdrawalXMLFileName);
                 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-                // Get Data by Reading the xml files
-                customers = CustomerManager.ReadXML(settings.CustomerXMLFileName);
+                
 
                 Refresh();
 
@@ -77,6 +76,9 @@ namespace DDB.Banking.UI
 
         private void Refresh()
         {
+            // Get Data by Reading the xml files
+            customers = CustomerManager.ReadXML(settings.CustomerXMLFileName);
+
             lbxCustomers.DataSource = null;
             lbxCustomers.DataSource = customers;
             lbxCustomers.DisplayMember = "FullName";
@@ -305,7 +307,14 @@ namespace DDB.Banking.UI
                             }
                             else
                             {
-                                // do the good stuff
+                                int selectedCustIndex = lbxCustomers.SelectedIndex;
+                                customers[selectedCustIndex].FirstName = txtFirstName.Text.Trim();
+                                customers[selectedCustIndex].LastName = txtLastName.Text.Trim();
+                                customers[selectedCustIndex].SSN = txtSSN.Text.Trim();
+                                customers[selectedCustIndex].BirthDate = dtpDOB.Value;
+
+                                CustomerManager.WriteXML(customers, settings.CustomerXMLFileName);
+                                Refresh();
                             }
                         }
                     }
