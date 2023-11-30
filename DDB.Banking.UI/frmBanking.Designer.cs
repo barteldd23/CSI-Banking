@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             lbxCustomers = new ListBox();
             lblCustomers = new Label();
             lblFirstName = new Label();
@@ -53,6 +53,11 @@
             btnExit = new Button();
             statusStrip1 = new StatusStrip();
             lblStatus = new ToolStripStatusLabel();
+            btnSave = new Button();
+            btnClear = new Button();
+            btnDelete = new Button();
+            btnAdd = new Button();
+            btnWriteToFile = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvDeposits).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvWithdrawals).BeginInit();
             statusStrip1.SuspendLayout();
@@ -167,10 +172,10 @@
             dgvDeposits.AllowUserToAddRows = false;
             dgvDeposits.AllowUserToDeleteRows = false;
             dgvDeposits.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(255, 255, 128);
-            dgvDeposits.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(255, 255, 128);
+            dgvDeposits.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             dgvDeposits.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvDeposits.Location = new Point(12, 265);
+            dgvDeposits.Location = new Point(12, 333);
             dgvDeposits.MultiSelect = false;
             dgvDeposits.Name = "dgvDeposits";
             dgvDeposits.ReadOnly = true;
@@ -183,7 +188,7 @@
             // 
             lblDeposits.AutoSize = true;
             lblDeposits.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblDeposits.Location = new Point(12, 247);
+            lblDeposits.Location = new Point(12, 315);
             lblDeposits.Name = "lblDeposits";
             lblDeposits.Size = new Size(55, 15);
             lblDeposits.TabIndex = 14;
@@ -191,7 +196,7 @@
             // 
             // btnAddDeposit
             // 
-            btnAddDeposit.Location = new Point(410, 421);
+            btnAddDeposit.Location = new Point(410, 489);
             btnAddDeposit.Name = "btnAddDeposit";
             btnAddDeposit.Size = new Size(100, 27);
             btnAddDeposit.TabIndex = 15;
@@ -201,7 +206,7 @@
             // 
             // btnEditDeposit
             // 
-            btnEditDeposit.Location = new Point(516, 421);
+            btnEditDeposit.Location = new Point(516, 489);
             btnEditDeposit.Name = "btnEditDeposit";
             btnEditDeposit.Size = new Size(100, 27);
             btnEditDeposit.TabIndex = 16;
@@ -211,7 +216,7 @@
             // 
             // btnEditWithdrawal
             // 
-            btnEditWithdrawal.Location = new Point(427, 621);
+            btnEditWithdrawal.Location = new Point(427, 689);
             btnEditWithdrawal.Name = "btnEditWithdrawal";
             btnEditWithdrawal.Size = new Size(100, 27);
             btnEditWithdrawal.TabIndex = 20;
@@ -221,7 +226,7 @@
             // 
             // btnAddWithdrawal
             // 
-            btnAddWithdrawal.Location = new Point(321, 621);
+            btnAddWithdrawal.Location = new Point(321, 689);
             btnAddWithdrawal.Name = "btnAddWithdrawal";
             btnAddWithdrawal.Size = new Size(100, 27);
             btnAddWithdrawal.TabIndex = 19;
@@ -233,7 +238,7 @@
             // 
             lblWithdrawals.AutoSize = true;
             lblWithdrawals.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblWithdrawals.Location = new Point(12, 447);
+            lblWithdrawals.Location = new Point(12, 515);
             lblWithdrawals.Name = "lblWithdrawals";
             lblWithdrawals.Size = new Size(76, 15);
             lblWithdrawals.TabIndex = 18;
@@ -241,10 +246,10 @@
             // 
             // dgvWithdrawals
             // 
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(255, 255, 128);
-            dgvWithdrawals.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(255, 255, 128);
+            dgvWithdrawals.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             dgvWithdrawals.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvWithdrawals.Location = new Point(12, 465);
+            dgvWithdrawals.Location = new Point(12, 533);
             dgvWithdrawals.MultiSelect = false;
             dgvWithdrawals.Name = "dgvWithdrawals";
             dgvWithdrawals.ReadOnly = true;
@@ -255,7 +260,7 @@
             // 
             // btnExit
             // 
-            btnExit.Location = new Point(533, 621);
+            btnExit.Location = new Point(533, 689);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(83, 27);
             btnExit.TabIndex = 21;
@@ -266,7 +271,7 @@
             // statusStrip1
             // 
             statusStrip1.Items.AddRange(new ToolStripItem[] { lblStatus });
-            statusStrip1.Location = new Point(0, 658);
+            statusStrip1.Location = new Point(0, 724);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Size = new Size(657, 22);
             statusStrip1.TabIndex = 22;
@@ -278,11 +283,61 @@
             lblStatus.Size = new Size(38, 17);
             lblStatus.Text = "status";
             // 
+            // btnSave
+            // 
+            btnSave.Location = new Point(12, 229);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(85, 29);
+            btnSave.TabIndex = 23;
+            btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = true;
+            // 
+            // btnClear
+            // 
+            btnClear.Location = new Point(103, 229);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(85, 29);
+            btnClear.TabIndex = 24;
+            btnClear.Text = "Clear";
+            btnClear.UseVisualStyleBackColor = true;
+            // 
+            // btnDelete
+            // 
+            btnDelete.Location = new Point(194, 229);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(85, 29);
+            btnDelete.TabIndex = 25;
+            btnDelete.Text = "Delete";
+            btnDelete.UseVisualStyleBackColor = true;
+            // 
+            // btnAdd
+            // 
+            btnAdd.Location = new Point(103, 264);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(85, 29);
+            btnAdd.TabIndex = 26;
+            btnAdd.Text = "Add";
+            btnAdd.UseVisualStyleBackColor = true;
+            // 
+            // btnWriteToFile
+            // 
+            btnWriteToFile.Location = new Point(194, 264);
+            btnWriteToFile.Name = "btnWriteToFile";
+            btnWriteToFile.Size = new Size(85, 29);
+            btnWriteToFile.TabIndex = 27;
+            btnWriteToFile.Text = "Write To File";
+            btnWriteToFile.UseVisualStyleBackColor = true;
+            // 
             // frmBanking
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(657, 680);
+            ClientSize = new Size(657, 746);
+            Controls.Add(btnWriteToFile);
+            Controls.Add(btnAdd);
+            Controls.Add(btnDelete);
+            Controls.Add(btnClear);
+            Controls.Add(btnSave);
             Controls.Add(statusStrip1);
             Controls.Add(btnExit);
             Controls.Add(btnEditWithdrawal);
@@ -342,5 +397,11 @@
         private Button btnExit;
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel lblStatus;
+        private Button button1;
+        private Button btnClear;
+        private Button btnDelete;
+        private Button btnAdd;
+        private Button btnWriteToFile;
+        private Button btnSave;
     }
 }

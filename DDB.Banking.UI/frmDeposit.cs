@@ -71,6 +71,8 @@ namespace DDB.Banking.UI
                             deposit.DepositId = customer.Deposits.Any() ? customer.Deposits.Max(d => d.DepositId) + 1 : 1;
 
                             customer.Deposits.Add(deposit);
+                            customer.LastDepositAmount = deposit.DepositAmount;
+                            customer.LastDepositDate = deposit.DepositeDate;
                         }
                         else
                         {

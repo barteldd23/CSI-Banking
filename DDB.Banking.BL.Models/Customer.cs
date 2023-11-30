@@ -11,5 +11,9 @@ namespace DDB.Banking.BL.Models
         public int Id { get; set; }
         public  List<Deposit> Deposits { get; set; }
         public List<Withdrawal> Withdrawals { get; set; }
+        public double LastDepositAmount { get; set; } //Calculate from Transactions?
+        public DateTime LastDepositDate { get; set; } //Calculate from Transactions?
+        public  double LastWithdrawalAmount { get; set; } //Calculate from Transactions?
+        public DateTime LastWithdrawalDate { get; set; } //Calculate from Transactions?
     }
 }

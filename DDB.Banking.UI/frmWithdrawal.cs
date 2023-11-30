@@ -67,6 +67,8 @@ namespace DDB.Banking.UI
                             withdrawal.WithdrawalId = customer.Withdrawals.Any() ? customer.Withdrawals.Max(d => d.WithdrawalId) + 1 : 1;
 
                             customer.Withdrawals.Add(withdrawal);
+                            customer.LastWithdrawalAmount = withdrawal.WithdrawalAmount;
+                            customer.LastWithdrawalDate = withdrawal.WithdrawalDate;
                         }
                         else
                         {
