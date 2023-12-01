@@ -146,10 +146,14 @@ namespace DDB.Banking.UI
                 dgvDeposits.DataSource = null;
                 if (deposits != null)
                 {
-                    dgvDeposits.DataSource = deposits;
-                    dgvDeposits.Columns[1].Visible = false;
-                    dgvDeposits.Columns[2].DefaultCellStyle.Format = "C";
-                    dgvDeposits.Columns[3].DefaultCellStyle.Format = "MM/dd/yyyy";
+                    if(deposits.Count > 0)
+                    {
+                        dgvDeposits.DataSource = deposits;
+                        dgvDeposits.Columns[1].Visible = false;
+                        dgvDeposits.Columns[2].DefaultCellStyle.Format = "C";
+                        dgvDeposits.Columns[3].DefaultCellStyle.Format = "MM/dd/yyyy";
+                    }
+                    
                 }
 
 
@@ -174,10 +178,14 @@ namespace DDB.Banking.UI
 
                 if (withdrawals != null)
                 {
-                    dgvWithdrawals.DataSource = withdrawals;
-                    dgvWithdrawals.Columns[1].Visible = false;
-                    dgvWithdrawals.Columns[2].DefaultCellStyle.Format = "C";
-                    dgvWithdrawals.Columns[3].DefaultCellStyle.Format = "MM/dd/yyyy";
+                    if (withdrawals.Count > 0)
+                    {
+                        dgvWithdrawals.DataSource = withdrawals;
+                        dgvWithdrawals.Columns[1].Visible = false;
+                        dgvWithdrawals.Columns[2].DefaultCellStyle.Format = "C";
+                        dgvWithdrawals.Columns[3].DefaultCellStyle.Format = "MM/dd/yyyy";
+                    }
+                    
                 }
 
             }
