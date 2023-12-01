@@ -2,6 +2,7 @@ using DDB.Banking.BL;
 using DDB.Banking.BL.Models;
 using Microsoft.VisualBasic.Devices;
 using Microsoft.Extensions.Configuration;
+using DDB.Utility.PL;
 
 
 /*
@@ -85,6 +86,21 @@ namespace DDB.Banking.UI
 
         }
 
+        private void Refresh(string statusMsg, int selectedCustomer)
+        {
+            // Get Data by Reading the xml files
+            customers = CustomerManager.ReadXML(settings.CustomerXMLFileName);
+
+            lbxCustomers.DataSource = null;
+            lbxCustomers.DataSource = customers;
+            lbxCustomers.DisplayMember = "FullName";
+
+            lbxCustomers.SelectedIndex = selectedCustomer;
+            lblStatus.ForeColor = Color.Blue;
+            lblStatus.Text = statusMsg;
+
+        }
+
 
         // When a customer is selected in the listbox: Display their info on the txtboxes.
         // populate their deposts and withdrawals in the data grid views using RefreshDeposits(List<deposit>) RefreshWithdrawals(List<withdrawal>) functions
@@ -101,8 +117,18 @@ namespace DDB.Banking.UI
                     Customer customer = lbxCustomers.SelectedItem as Customer;
                     txtFirstName.Text = customer.FirstName;
                     txtLastName.Text = customer.LastName;
-                    txtSSN.Text = customer.SSN.Substring(0, 3) + "-" +
+
+                    // Make SSN Display Fancy if its 9 characters long.
+                    if (customer.SSN.Length == 9)
+                    {
+                        txtSSN.Text = customer.SSN.Substring(0, 3) + "-" +
                                   customer.SSN.Substring(3, 2) + "-" + customer.SSN.Substring(5, 4);
+                    }
+                    else
+                    {
+                        txtSSN.Text = customer.SSN;
+                    }
+
                     txtId.Text = customer.Id.ToString();
                     dtpDOB.Value = customer.BirthDate;
 
@@ -146,14 +172,14 @@ namespace DDB.Banking.UI
                 dgvDeposits.DataSource = null;
                 if (deposits != null)
                 {
-                    if(deposits.Count > 0)
+                    if (deposits.Count > 0)
                     {
                         dgvDeposits.DataSource = deposits;
                         dgvDeposits.Columns[1].Visible = false;
                         dgvDeposits.Columns[2].DefaultCellStyle.Format = "C";
                         dgvDeposits.Columns[3].DefaultCellStyle.Format = "MM/dd/yyyy";
                     }
-                    
+
                 }
 
 
@@ -185,7 +211,7 @@ namespace DDB.Banking.UI
                         dgvWithdrawals.Columns[2].DefaultCellStyle.Format = "C";
                         dgvWithdrawals.Columns[3].DefaultCellStyle.Format = "MM/dd/yyyy";
                     }
-                    
+
                 }
 
             }
@@ -310,6 +336,9 @@ namespace DDB.Banking.UI
         {
             try
             {
+                lblStatus.ForeColor = Color.Blue;
+                lblStatus.Text = string.Empty;
+
                 if (string.IsNullOrEmpty(txtFirstName.Text.Trim()))
                 {
                     txtFirstName.Focus();
@@ -348,7 +377,9 @@ namespace DDB.Banking.UI
                                 customers[selectedCustIndex].BirthDate = dtpDOB.Value;
 
                                 CustomerManager.WriteXML(customers, settings.CustomerXMLFileName);
-                                Refresh();
+
+                                string message = "Added " + customers[selectedCustIndex].FullName;
+                                Refresh(message, selectedCustIndex);
                             }
                         }
                     }
@@ -368,24 +399,39 @@ namespace DDB.Banking.UI
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            // Only Add if Id is empty, other wise they might mean edit.
-            if (string.IsNullOrEmpty(txtId.Text))
+            try
             {
-                Customer customer = new Customer();
-                customer.FirstName = txtFirstName.Text;
-                customer.LastName = txtLastName.Text;
-                customer.SSN = txtSSN.Text;
-                customer.BirthDate = dtpDOB.Value;
-                customer.Id = customers.Max(x => x.Id) + 1;
+                lblStatus.ForeColor = Color.Blue;
+                lblStatus.Text = string.Empty;
 
-                customers.Add(customer);
-                CustomerManager.WriteXML(customers, settings.CustomerXMLFileName);
+                // Only Add if Id is empty, other wise they might mean edit.
+                if (string.IsNullOrEmpty(txtId.Text))
+                {
+                    Customer customer = new Customer();
+                    customer.FirstName = txtFirstName.Text;
+                    customer.LastName = txtLastName.Text;
+                    customer.SSN = txtSSN.Text;
+                    customer.BirthDate = dtpDOB.Value;
+                    customer.Id = customers.Max(x => x.Id) + 1;
 
-                Refresh();
+                    customers.Add(customer);
+                    CustomerManager.WriteXML(customers, settings.CustomerXMLFileName);
+
+
+
+                    string message = "Updated " + customer.FullName;
+                    Refresh(message, customers.Count - 1);
+
+                }
+                else
+                {
+                    MessageBox.Show("Did you mean Save? Clear the screen If you want to Add New Customer");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Did you mean Save? Clear the screen If you want to Add New Customer");
+                lblStatus.ForeColor = Color.Red;
+                lblStatus.Text = ex.Message;
             }
         }
 
@@ -399,13 +445,28 @@ namespace DDB.Banking.UI
             {
                 Customer customer = lbxCustomers.SelectedItem as Customer;
                 DialogResult result = MessageBox.Show("Delete " + customer.FullName + " ?", "Are You sure?", MessageBoxButtons.YesNo);
-                if( result== DialogResult.Yes)
+                if (result == DialogResult.Yes)
                 {
                     customers.RemoveAt(lbxCustomers.SelectedIndex);
                     CustomerManager.WriteXML(customers, settings.CustomerXMLFileName);
                     Refresh();
                 }
-                
+
+            }
+        }
+
+        private void btnWriteToFile_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CustomerManager.Write(customers, settings.CustomersFileName);
+                lblStatus.ForeColor = Color.Blue;
+                lblStatus.Text = "Wrote to: " + settings.CustomersFileName;
+            }
+            catch (Exception ex)
+            {
+                lblStatus.ForeColor = Color.Red;
+                lblStatus.Text = ex.Message;
             }
         }
     }

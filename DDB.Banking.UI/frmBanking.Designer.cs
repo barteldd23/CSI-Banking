@@ -331,6 +331,7 @@
             btnWriteToFile.TabIndex = 27;
             btnWriteToFile.Text = "Write To File";
             btnWriteToFile.UseVisualStyleBackColor = true;
+            btnWriteToFile.Click += btnWriteToFile_Click;
             // 
             // frmBanking
             // 

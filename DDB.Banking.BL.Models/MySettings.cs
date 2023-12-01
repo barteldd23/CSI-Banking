@@ -26,6 +26,7 @@ namespace DDB.Banking.BL.Models
         }
         public string DepositXMLFileName { get; set; }
         public string WithdrawalXMLFileName { get; set; }
+        public string CustomersFileName { get; set; }
 
 
 

@@ -19,6 +19,10 @@ namespace DDB.Banking.BL
             customer.BirthDate = new DateTime(1990, 2, 11);
             customer.Deposits = DepositManager.Populate(customer.Id);
             customer.Withdrawals = WithdrawalManager.Populate(customer.Id);
+            customer.LastDepositAmount = customer.Deposits[customer.Deposits.Count - 1].DepositAmount;
+            customer.LastDepositDate = customer.Deposits[customer.Deposits.Count - 1].DepositeDate;
+            customer.LastWithdrawalAmount = customer.Withdrawals[customer.Withdrawals.Count - 1].WithdrawalAmount;
+            customer.LastWithdrawalDate = customer.Withdrawals[customer.Withdrawals.Count - 1].WithdrawalDate;
             customers.Add(customer);
 
             customer = new Customer();
@@ -30,6 +34,10 @@ namespace DDB.Banking.BL
             customer.BirthDate = new DateTime(1999, 12, 2);
             customer.Deposits = DepositManager.Populate(customer.Id);
             customer.Withdrawals = WithdrawalManager.Populate(customer.Id);
+            customer.LastDepositAmount = customer.Deposits[customer.Deposits.Count - 1].DepositAmount;
+            customer.LastDepositDate = customer.Deposits[customer.Deposits.Count - 1].DepositeDate;
+            customer.LastWithdrawalAmount = customer.Withdrawals[customer.Withdrawals.Count - 1].WithdrawalAmount;
+            customer.LastWithdrawalDate = customer.Withdrawals[customer.Withdrawals.Count - 1].WithdrawalDate;
             customers.Add(customer);
 
             customer = new Customer();
@@ -41,6 +49,10 @@ namespace DDB.Banking.BL
             customer.BirthDate = new DateTime(1983, 5, 6);
             customer.Deposits = DepositManager.Populate(customer.Id);
             customer.Withdrawals = WithdrawalManager.Populate(customer.Id);
+            customer.LastDepositAmount = customer.Deposits[customer.Deposits.Count - 1].DepositAmount;
+            customer.LastDepositDate = customer.Deposits[customer.Deposits.Count - 1].DepositeDate;
+            customer.LastWithdrawalAmount = customer.Withdrawals[customer.Withdrawals.Count - 1].WithdrawalAmount;
+            customer.LastWithdrawalDate = customer.Withdrawals[customer.Withdrawals.Count - 1].WithdrawalDate;
             customers.Add(customer);
 
             return customers;
@@ -85,6 +97,24 @@ namespace DDB.Banking.BL
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        public static bool Write(List<Customer> customers, string filePath)
+        {
+            try
+            {
+                FileIO.Delete(filePath);
+                foreach (Customer customer in customers)
+                {
+                    FileIO.Write(filePath, customer.DataFormat);
+
+                }
+                return true;
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }
