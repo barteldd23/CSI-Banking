@@ -10,7 +10,7 @@ namespace DDB.Utility.PL
 {
     public class Database
     {
-        const string ConnectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=DDB.ComputerWorld.DB;Integrated Security=True";
+        const string ConnectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=DDB.Banking.DB;Integrated Security=True";
         SqlConnection sqlConnection;
 
         public ConnectionState Open()

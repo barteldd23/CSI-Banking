@@ -1,11 +1,14 @@
 ﻿using DDB.Banking.BL.Models;
 using System.Xml.Serialization;
 using DDB.Utility.PL;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace DDB.Banking.BL
 {
     public static class CustomerManager
     {
+        #region "File Stuff"
         public static List<Customer> Populate()
         {
             List<Customer> customers = new List<Customer>();
@@ -118,6 +121,194 @@ namespace DDB.Banking.BL
                 throw;
             }
         }
+        #endregion
+
+        #region "DB Stuff"
+
+        public static List<Customer> ReadDB()
+        {
+            try
+            {
+                List<Customer> customers = new List<Customer>();
+
+                Database db = new Database();
+                DataTable dt = new DataTable();
+                string sql = "Select * from tblCustomer";
+                SqlCommand command = new SqlCommand(sql);
+                dt = db.Select(command);
+                if (dt.Rows.Count > 0)
+                {
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        Customer customer = new Customer();
+                        customer.Id = Convert.ToInt32(dr["ID"]);
+                        customer.SSN = dr["SSN"].ToString();
+                        customer.FirstName = dr["FirstName"].ToString();
+                        customer.LastName = dr["LastName"].ToString();
+                        customer.BirthDate = Convert.ToDateTime(dr["DOB"]);
+
+                        customers.Add(customer);
+                    }
+                }
+                return customers;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public static Customer ReadDB(int id)
+        {
+            try
+            {
+                Customer customer = new Customer();
+                Database db = new Database();
+                DataTable dt = new DataTable();
+                string sql = "Select * from tblCustomer where Id = @id";
+                SqlCommand command = new SqlCommand(sql);
+                command.Parameters.AddWithValue("@id", id);
+                dt = db.Select(command);
+                if (dt.Rows.Count == 1)
+                {
+                    DataRow dr = dt.Rows[0];
+                    customer.Id = Convert.ToInt32(dr["Id"]);
+                    customer.FirstName = dr["FirstName"].ToString();
+                    customer.LastName = dr["LastName"].ToString();
+                    customer.BirthDate = Convert.ToDateTime(dr["DOB"]);
+                }
+                else
+                {
+                    throw new Exception("Customer Does not Exist");
+                }
+
+                return customer;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public static int Insert(Customer customer, bool rollback = false)
+        {
+            try
+            {
+                Database db = new Database();
+                DataTable dt = new DataTable();
+                string sql = "Insert into tblCustomer (Id, SSN, FirstName, LastName, DOB) ";
+                sql += "Values (@id, @SSN, @FirstName, @LastName, @DOB)";
+                SqlCommand command = new SqlCommand(sql);
+                command.Parameters.AddWithValue("@id", customer.Id);
+                command.Parameters.AddWithValue("@SSN", customer.SSN);
+                command.Parameters.AddWithValue("@FirstName", customer.FirstName);
+                command.Parameters.AddWithValue("@LastName", customer.LastName);
+                command.Parameters.AddWithValue("@DOB", customer.BirthDate.Date);
+
+                int iRows = db.Insert(command);
+
+                if(customer.Deposits.Any())
+                {
+                    foreach (Deposit deposit in customer.Deposits)
+                    {
+                        iRows += DepositManager.Insert(deposit, rollback);
+                    }
+                }
+
+                if (customer.Withdrawals.Any())
+                {
+                    foreach (Withdrawal withdrawal in customer.Withdrawals)
+                    {
+                        iRows += WithdrawalManager.Insert(withdrawal, rollback);
+                    }
+                }
+
+                return iRows;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public static int Update(Customer customer, int maxDepositId, int maxWithdrawalId bool rollback = false)
+        {
+            try
+            {
+                Database db = new Database();
+                DataTable dt = new DataTable();
+                string sql = "Insert into tblCustomer (Id, SSN, FirstName, LastName, DOB) ";
+                sql += "Values (@id, @SSN, @FirstName, @LastName, @DOB)";
+                SqlCommand command = new SqlCommand(sql);
+                command.Parameters.AddWithValue("@id", customer.Id);
+                command.Parameters.AddWithValue("@SSN", customer.SSN);
+                command.Parameters.AddWithValue("@FirstName", customer.FirstName);
+                command.Parameters.AddWithValue("@LastName", customer.LastName);
+                command.Parameters.AddWithValue("@DOB", customer.BirthDate.Date);
+
+                int iRows = db.Insert(command);
+
+                DepositManager.DeleteByCustId(customer.Id, rollback);
+                WithdrawalManager.DeleteByCustId(customer.Id, rollback);
+
+                if (customer.Deposits.Any())
+                {
+                    foreach (Deposit deposit in customer.Deposits)
+                    {
+                        deposit.DepositId = ++maxDepositId;
+                        iRows += DepositManager.Insert(deposit, rollback);
+                    }
+                }
+
+                if (customer.Withdrawals.Any())
+                {
+                    foreach (Withdrawal withdrawal in customer.Withdrawals)
+                    {
+                        withdrawal.WithdrawalId = ++maxWithdrawalId;
+                        iRows += WithdrawalManager.Insert(withdrawal, rollback);
+                    }
+                }
+
+                return iRows;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public static int Delete(Customer customer, bool rollback = false)
+        {
+            try
+            {
+                Database db = new Database();
+                DataTable dt = new DataTable();
+                string sql = "delete from tblCustomer where Id = @id ";
+                SqlCommand command = new SqlCommand(sql);
+                command.Parameters.AddWithValue("@id", customer.Id);
+
+                int iRows = db.Delete(command);
+
+                DepositManager.DeleteByCustId(customer.Id, rollback);
+                WithdrawalManager.DeleteByCustId(customer.Id, rollback);
+
+                return iRows;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        #endregion
+
+
     }
-    
+
 }

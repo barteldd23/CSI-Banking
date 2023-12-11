@@ -40,23 +40,25 @@ namespace DDB.Banking.UI
                 lblStatus.ForeColor = Color.Blue;
                 lblStatus.Text = string.Empty;
 
-                //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                customers = CustomerManager.ReadDB();
+
+                //~~~~~~~~~~~~~~~~~~~~XML STUFF~~~~~~~~~~~~~~~~~~~~~~~~~~~
                 //~~~~~~~~~~~Create Default Data Files~~~~~~~~~~~~~~~~~~~
-                customers = CustomerManager.Populate();
-                List<Deposit> allDeposits = new List<Deposit>();
-                List<Withdrawal> allWithdrawals = new List<Withdrawal>();
-                foreach (Customer customer in customers)
-                {
-                    foreach (Deposit deposit in customer.Deposits)
-                    {
-                        allDeposits.Add(deposit);
-                    }
-                    foreach (Withdrawal withdrawal in customer.Withdrawals)
-                    {
-                        allWithdrawals.Add(withdrawal);
-                    }
-                }
-                CustomerManager.WriteXML(customers, settings.CustomerXMLFileName);
+                //customers = CustomerManger.Populate();
+                //List<Deposit> allDeposits = new List<Deposit>();
+                //List<Withdrawal> allWithdrawals = new List<Withdrawal>();
+                //foreach (Customer customer in customers)
+                //{
+                //    foreach (Deposit deposit in customer.Deposits)
+                //    {
+                //        allDeposits.Add(deposit);
+                //    }
+                //    foreach (Withdrawal withdrawal in customer.Withdrawals)
+                //    {
+                //        allWithdrawals.Add(withdrawal);
+                //    }
+                //}
+                // CustomerManager.WriteXML(customers, settings.CustomerXMLFileName);
                 //DepositManager.WriteXML(allDeposits, settings.DepositXMLFileName);
                 //WithdrawalManager.WriteXML(allWithdrawals, settings.WithdrawalXMLFileName);
                 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
