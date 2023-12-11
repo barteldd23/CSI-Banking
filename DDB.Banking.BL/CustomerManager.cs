@@ -177,6 +177,8 @@ namespace DDB.Banking.BL
                     customer.FirstName = dr["FirstName"].ToString();
                     customer.LastName = dr["LastName"].ToString();
                     customer.BirthDate = Convert.ToDateTime(dr["DOB"]);
+                    customer.Deposits = DepositManager.ReadDB(customer.Id);
+                    customer.Withdrawals = WithdrawalManager.ReadDB(customer.Id);
                 }
                 else
                 {
@@ -256,6 +258,8 @@ namespace DDB.Banking.BL
 
                 if (customer.Deposits.Any())
                 {
+                    List<Deposit> allDeposits = DepositManager.ReadAll();
+                    int max = allDeposits.Max(i => i.DepositId);
                     foreach (Deposit deposit in customer.Deposits)
                     {
                         deposit.DepositId = ++maxDepositId;
