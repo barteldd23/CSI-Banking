@@ -201,7 +201,7 @@ namespace DDB.Banking.BL
                 command.Parameters.AddWithValue("@Amount", deposit.DepositAmount);
                 command.Parameters.AddWithValue("@Date", deposit.DepositeDate);
 
-                int iRows = db.Insert(command);
+                int iRows = db.Insert(command, rollback);
 
                 return iRows;
             }
@@ -212,43 +212,21 @@ namespace DDB.Banking.BL
             }
         }
 
-        public static int Update(Deposit deposit, int maxDepositId, int maxWithdrawalId bool rollback = false)
+        public static int Update(Deposit deposit, bool rollback = false)
         {
             try
             {
                 Database db = new Database();
                 DataTable dt = new DataTable();
-                string sql = "Insert into tblDeposit (Id, SSN, FirstName, LastName, DOB) ";
-                sql += "Values (@id, @SSN, @FirstName, @LastName, @DOB)";
+                string sql = "Update tblDeposit set Id = @id, CustomerId = @CustomerId, Amount = @Amount, Date = @Date where Id = @id) ";
+                
                 SqlCommand command = new SqlCommand(sql);
-                command.Parameters.AddWithValue("@id", deposit.Id);
-                command.Parameters.AddWithValue("@SSN", deposit.SSN);
-                command.Parameters.AddWithValue("@FirstName", deposit.FirstName);
-                command.Parameters.AddWithValue("@LastName", deposit.LastName);
-                command.Parameters.AddWithValue("@DOB", deposit.BirthDate.Date);
+                command.Parameters.AddWithValue("@id", deposit.DepositId);
+                command.Parameters.AddWithValue("@CustomerId", deposit.CustomerId);
+                command.Parameters.AddWithValue("@Amount", deposit.DepositAmount);
+                command.Parameters.AddWithValue("@Date", deposit.DepositeDate);
 
-                int iRows = db.Insert(command);
-
-                DepositManager.DeleteByCustId(deposit.Id, rollback);
-                WithdrawalManager.DeleteByCustId(deposit.Id, rollback);
-
-                if (deposit.Deposits.Any())
-                {
-                    foreach (Deposit deposit in deposit.Deposits)
-                    {
-                        deposit.DepositId = ++maxDepositId;
-                        iRows += DepositManager.Insert(deposit, rollback);
-                    }
-                }
-
-                if (deposit.Withdrawals.Any())
-                {
-                    foreach (Withdrawal withdrawal in deposit.Withdrawals)
-                    {
-                        withdrawal.WithdrawalId = ++maxWithdrawalId;
-                        iRows += WithdrawalManager.Insert(withdrawal, rollback);
-                    }
-                }
+                int iRows = db.Update(command, rollback);
 
                 return iRows;
             }
@@ -267,12 +245,30 @@ namespace DDB.Banking.BL
                 DataTable dt = new DataTable();
                 string sql = "delete from tblDeposit where Id = @id ";
                 SqlCommand command = new SqlCommand(sql);
-                command.Parameters.AddWithValue("@id", deposit.Id);
+                command.Parameters.AddWithValue("@id", deposit.DepositId);
 
-                int iRows = db.Delete(command);
+                int iRows = db.Delete(command, rollback);
 
-                DepositManager.DeleteByCustId(deposit.Id, rollback);
-                WithdrawalManager.DeleteByCustId(deposit.Id, rollback);
+                return iRows;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public static int DeleteByCustId(int custId, bool rollback = false)
+        {
+            try
+            {
+                Database db = new Database();
+                DataTable dt = new DataTable();
+                string sql = "delete from tblDeposit where CustomerId = @custId ";
+                SqlCommand command = new SqlCommand(sql);
+                command.Parameters.AddWithValue("@custId", custId);
+
+                int iRows = db.Delete(command, rollback);
 
                 return iRows;
             }

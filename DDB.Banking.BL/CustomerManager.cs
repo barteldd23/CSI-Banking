@@ -174,6 +174,7 @@ namespace DDB.Banking.BL
                 {
                     DataRow dr = dt.Rows[0];
                     customer.Id = Convert.ToInt32(dr["Id"]);
+                    customer.SSN = dr["SSN"].ToString();
                     customer.FirstName = dr["FirstName"].ToString();
                     customer.LastName = dr["LastName"].ToString();
                     customer.BirthDate = Convert.ToDateTime(dr["DOB"]);
@@ -209,7 +210,7 @@ namespace DDB.Banking.BL
                 command.Parameters.AddWithValue("@LastName", customer.LastName);
                 command.Parameters.AddWithValue("@DOB", customer.BirthDate.Date);
 
-                int iRows = db.Insert(command);
+                int iRows = db.Insert(command, rollback);
 
                 if(customer.Deposits.Any())
                 {
@@ -236,14 +237,14 @@ namespace DDB.Banking.BL
             }
         }
 
-        public static int Update(Customer customer, int maxDepositId, int maxWithdrawalId bool rollback = false)
+        public static int Update(Customer customer, bool rollback = false)
         {
             try
             {
                 Database db = new Database();
                 DataTable dt = new DataTable();
-                string sql = "Insert into tblCustomer (Id, SSN, FirstName, LastName, DOB) ";
-                sql += "Values (@id, @SSN, @FirstName, @LastName, @DOB)";
+                string sql = "Update tblCustomer set SSN = @SSN, FirstName = @FirstName, LastName = @LastName, DOB = @DOB where Id = @id ";
+                
                 SqlCommand command = new SqlCommand(sql);
                 command.Parameters.AddWithValue("@id", customer.Id);
                 command.Parameters.AddWithValue("@SSN", customer.SSN);
@@ -251,30 +252,7 @@ namespace DDB.Banking.BL
                 command.Parameters.AddWithValue("@LastName", customer.LastName);
                 command.Parameters.AddWithValue("@DOB", customer.BirthDate.Date);
 
-                int iRows = db.Insert(command);
-
-                DepositManager.DeleteByCustId(customer.Id, rollback);
-                WithdrawalManager.DeleteByCustId(customer.Id, rollback);
-
-                if (customer.Deposits.Any())
-                {
-                    List<Deposit> allDeposits = DepositManager.ReadAll();
-                    int max = allDeposits.Max(i => i.DepositId);
-                    foreach (Deposit deposit in customer.Deposits)
-                    {
-                        deposit.DepositId = ++maxDepositId;
-                        iRows += DepositManager.Insert(deposit, rollback);
-                    }
-                }
-
-                if (customer.Withdrawals.Any())
-                {
-                    foreach (Withdrawal withdrawal in customer.Withdrawals)
-                    {
-                        withdrawal.WithdrawalId = ++maxWithdrawalId;
-                        iRows += WithdrawalManager.Insert(withdrawal, rollback);
-                    }
-                }
+                int iRows = db.Insert(command, rollback);
 
                 return iRows;
             }
@@ -295,7 +273,7 @@ namespace DDB.Banking.BL
                 SqlCommand command = new SqlCommand(sql);
                 command.Parameters.AddWithValue("@id", customer.Id);
 
-                int iRows = db.Delete(command);
+                int iRows = db.Delete(command, rollback);
 
                 DepositManager.DeleteByCustId(customer.Id, rollback);
                 WithdrawalManager.DeleteByCustId(customer.Id, rollback);
