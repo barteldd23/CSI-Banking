@@ -53,5 +53,7 @@ namespace DDB.Banking.BL.Test
             Customer customer = CustomerManager.ReadDB(3);
             Assert.AreEqual(1, CustomerManager.Delete(customer, true));
         }
+
+
     }
 }

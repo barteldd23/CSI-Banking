@@ -84,7 +84,7 @@ namespace DDB.Banking.BL
 
                 Database db = new Database();
                 DataTable dt = new DataTable();
-                string sql = "Select * from tblWithdrawal where Id = @custId";
+                string sql = "Select * from tblWithdrawal where CustomerId = @custId";
                 SqlCommand command = new SqlCommand(sql);
                 command.Parameters.AddWithValue("@custId", custId);
                 dt = db.Select(command);
@@ -207,7 +207,7 @@ namespace DDB.Banking.BL
             {
                 Database db = new Database();
                 DataTable dt = new DataTable();
-                string sql = "Update tblWithdrawal set Id = @id, CustomerId = @CustomerId, Amount = @Amount, Date = @Date where Id = @id) ";
+                string sql = "Update tblWithdrawal set Id = @id, CustomerId = @CustomerId, Amount = @Amount, Date = @Date where Id = @id ";
 
                 SqlCommand command = new SqlCommand(sql);
                 command.Parameters.AddWithValue("@id", withdrawal.WithdrawalId);

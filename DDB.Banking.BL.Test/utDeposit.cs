@@ -21,5 +21,53 @@ namespace DDB.Banking.BL.Test
             Assert.AreEqual(list2.Count, 2);
             Assert.AreEqual(list3.Count, 2);
         }
+
+        [TestMethod]
+        public void ReadDBTest()
+        {
+            List<Deposit> cdeposits = DepositManager.ReadAll();
+            Assert.AreEqual(4, cdeposits.Count);
+        }
+
+        [TestMethod]
+        public void ReadOneDBTest()
+        {
+            List<Deposit> deposits = DepositManager.ReadDB(1);
+            Assert.AreEqual(2, deposits.Count);
+        }
+
+        [TestMethod]
+        public void InsertDBTest()
+        {
+            Deposit deposit = new Deposit();
+            deposit.DepositId = -99;
+            deposit.CustomerId = 3;
+            deposit.DepositAmount = 123;
+            deposit.DepositeDate = DateTime.Now;
+            Assert.AreEqual(1, DepositManager.Insert(deposit, true));
+        }
+
+        [TestMethod]
+        public void UpdateDBTest()
+        {
+            Deposit deposit = DepositManager.ReadDB(3)[0];
+            deposit.DepositAmount = 12314;
+            Assert.AreEqual(1, DepositManager.Update(deposit, true));
+        }
+
+        [TestMethod]
+        public void DeleteDBTest()
+        {
+            Deposit deposit = DepositManager.ReadDB(1)[1];
+            Assert.AreEqual(1, DepositManager.Delete(deposit, true));
+        }
+
+        [TestMethod]
+        public void DeleteByCustIdDBTest()
+        {
+            Assert.AreEqual(2, DepositManager.DeleteByCustId(1, true));
+        }
     }
+
+    
 }
