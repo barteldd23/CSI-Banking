@@ -80,7 +80,9 @@ namespace DDB.Banking.UI
         private void Refresh()
         {
             // Get Data by Reading the xml files
-            customers = CustomerManager.ReadXML(settings.CustomerXMLFileName);
+            //customers = CustomerManager.ReadXML(settings.CustomerXMLFileName);
+
+            customers = CustomerManager.ReadDB();
 
             lbxCustomers.DataSource = null;
             lbxCustomers.DataSource = customers;
@@ -91,7 +93,9 @@ namespace DDB.Banking.UI
         private void Refresh(string statusMsg, int selectedCustomer)
         {
             // Get Data by Reading the xml files
-            customers = CustomerManager.ReadXML(settings.CustomerXMLFileName);
+            //customers = CustomerManager.ReadXML(settings.CustomerXMLFileName);
+
+            customers = CustomerManager.ReadDB();
 
             lbxCustomers.DataSource = null;
             lbxCustomers.DataSource = customers;
@@ -133,6 +137,7 @@ namespace DDB.Banking.UI
 
                     txtId.Text = customer.Id.ToString();
                     dtpDOB.Value = customer.BirthDate;
+                    txtAge.Text = customer.Age.ToString();
 
                     RefreshDeposits(customer.Deposits);
                     RefreshWithdrawals(customer.Withdrawals);
@@ -238,7 +243,7 @@ namespace DDB.Banking.UI
                 frmDeposit.customer = selectedCustomer;
 
                 frmDeposit.ShowDialog();
-
+                
                 RefreshDeposits(selectedCustomer.Deposits);
 
                 //var row = dgvDeposits.SelectedRows[0];
@@ -378,7 +383,9 @@ namespace DDB.Banking.UI
                                 customers[selectedCustIndex].SSN = txtSSN.Text.Trim();
                                 customers[selectedCustIndex].BirthDate = dtpDOB.Value;
 
-                                CustomerManager.WriteXML(customers, settings.CustomerXMLFileName);
+                                CustomerManager.Update(customers[selectedCustIndex]);
+
+                                //CustomerManager.WriteXML(customers, settings.CustomerXMLFileName);
 
                                 string message = "Added " + customers[selectedCustIndex].FullName;
                                 Refresh(message, selectedCustIndex);
@@ -417,11 +424,12 @@ namespace DDB.Banking.UI
                     customer.Id = customers.Max(x => x.Id) + 1;
 
                     customers.Add(customer);
-                    CustomerManager.WriteXML(customers, settings.CustomerXMLFileName);
+                    CustomerManager.Insert(customer);
+                    //CustomerManager.WriteXML(customers, settings.CustomerXMLFileName);
 
 
 
-                    string message = "Updated " + customer.FullName;
+                    string message = "Added " + customer.FullName;
                     Refresh(message, customers.Count - 1);
 
                 }
@@ -449,8 +457,11 @@ namespace DDB.Banking.UI
                 DialogResult result = MessageBox.Show("Delete " + customer.FullName + " ?", "Are You sure?", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
                 {
+                    Customer selectedCustomer = lbxCustomers.SelectedItem as Customer;
                     customers.RemoveAt(lbxCustomers.SelectedIndex);
-                    CustomerManager.WriteXML(customers, settings.CustomerXMLFileName);
+                    CustomerManager.Delete(selectedCustomer);
+
+                    //CustomerManager.WriteXML(customers, settings.CustomerXMLFileName);
                     Refresh();
                 }
 

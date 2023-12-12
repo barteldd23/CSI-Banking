@@ -26,14 +26,14 @@ namespace DDB.Banking.BL.Test
         public void ReadDBTest()
         {
             List<Withdrawal> cwithdrawals = WithdrawalManager.ReadAll();
-            Assert.AreEqual(4, cwithdrawals.Count);
+            Assert.AreEqual(9, cwithdrawals.Count);
         }
 
         [TestMethod]
         public void ReadOneDBTest()
         {
             List<Withdrawal> withdrawals = WithdrawalManager.ReadDB(1);
-            Assert.AreEqual(2, withdrawals.Count);
+            Assert.AreEqual(3, withdrawals.Count);
         }
 
         [TestMethod]
@@ -65,7 +65,7 @@ namespace DDB.Banking.BL.Test
         [TestMethod]
         public void DeleteByCustIdDBTest()
         {
-            Assert.AreEqual(2, WithdrawalManager.DeleteByCustId(1, true));
+            Assert.AreEqual(3, WithdrawalManager.DeleteByCustId(1, true));
         }
     }
 }

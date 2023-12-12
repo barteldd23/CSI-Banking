@@ -147,6 +147,9 @@ namespace DDB.Banking.BL
                         customer.LastName = dr["LastName"].ToString();
                         customer.BirthDate = Convert.ToDateTime(dr["DOB"]);
 
+                        customer.Deposits = DepositManager.ReadDB(customer.Id);
+                        customer.Withdrawals = WithdrawalManager.ReadDB(customer.Id);
+
                         customers.Add(customer);
                     }
                 }

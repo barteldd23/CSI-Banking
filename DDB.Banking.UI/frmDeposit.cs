@@ -1,4 +1,5 @@
-﻿using DDB.Banking.BL.Models;
+﻿using DDB.Banking.BL;
+using DDB.Banking.BL.Models;
 using Microsoft.VisualBasic.Devices;
 using System;
 using System.Collections.Generic;
@@ -69,9 +70,10 @@ namespace DDB.Banking.UI
                             deposit.CustomerId = customer.Id;
                             deposit.DepositAmount = depositValue;
                             deposit.DepositeDate = dtpDepositDate.Value;
-                            deposit.DepositId = customer.Deposits.Any() ? customer.Deposits.Max(d => d.DepositId) + 1 : 1;
+                            deposit.DepositId = DepositManager.ReadAll().Any() ? DepositManager.ReadAll().Max(d => d.DepositId) + 1 : 1;
 
                             customer.Deposits.Add(deposit);
+                            DepositManager.Insert(deposit);
                             customer.LastDepositAmount = deposit.DepositAmount;
                             customer.LastDepositDate = deposit.DepositeDate;
                         }
@@ -79,6 +81,7 @@ namespace DDB.Banking.UI
                         {
                             customer.Deposits[depositIndex].DepositAmount = depositValue;
                             customer.Deposits[depositIndex].DepositeDate = dtpDepositDate.Value;
+                            DepositManager.Update(customer.Deposits[depositIndex]);
                         }
                     }
                     else

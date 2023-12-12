@@ -18,6 +18,8 @@ namespace DDB.Banking.BL.Test
         {
             List<Customer> customers = CustomerManager.ReadDB();
             Assert.AreEqual(3, customers.Count);
+            Assert.AreEqual(3, customers[0].Deposits.Count);
+            Assert.AreEqual(3, customers[0].Withdrawals.Count);
         }
 
         [TestMethod]

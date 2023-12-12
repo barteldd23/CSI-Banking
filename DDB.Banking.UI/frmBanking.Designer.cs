@@ -58,6 +58,8 @@
             btnDelete = new Button();
             btnAdd = new Button();
             btnWriteToFile = new Button();
+            txtAge = new TextBox();
+            lblAge = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvDeposits).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvWithdrawals).BeginInit();
             statusStrip1.SuspendLayout();
@@ -69,7 +71,7 @@
             lbxCustomers.ItemHeight = 15;
             lbxCustomers.Location = new Point(12, 29);
             lbxCustomers.Name = "lbxCustomers";
-            lbxCustomers.Size = new Size(321, 184);
+            lbxCustomers.Size = new Size(915, 184);
             lbxCustomers.TabIndex = 0;
             lbxCustomers.SelectedIndexChanged += lbxCustomers_SelectedIndexChanged;
             // 
@@ -86,7 +88,7 @@
             // lblFirstName
             // 
             lblFirstName.AutoSize = true;
-            lblFirstName.Location = new Point(359, 11);
+            lblFirstName.Location = new Point(12, 286);
             lblFirstName.Name = "lblFirstName";
             lblFirstName.Size = new Size(67, 15);
             lblFirstName.TabIndex = 2;
@@ -95,7 +97,7 @@
             // lblLastName
             // 
             lblLastName.AutoSize = true;
-            lblLastName.Location = new Point(359, 57);
+            lblLastName.Location = new Point(12, 315);
             lblLastName.Name = "lblLastName";
             lblLastName.Size = new Size(66, 15);
             lblLastName.TabIndex = 3;
@@ -104,7 +106,7 @@
             // lblSSN
             // 
             lblSSN.AutoSize = true;
-            lblSSN.Location = new Point(359, 103);
+            lblSSN.Location = new Point(21, 257);
             lblSSN.Name = "lblSSN";
             lblSSN.Size = new Size(31, 15);
             lblSSN.TabIndex = 4;
@@ -113,7 +115,7 @@
             // lblId
             // 
             lblId.AutoSize = true;
-            lblId.Location = new Point(359, 149);
+            lblId.Location = new Point(23, 228);
             lblId.Name = "lblId";
             lblId.Size = new Size(20, 15);
             lblId.TabIndex = 5;
@@ -122,7 +124,7 @@
             // lblDOB
             // 
             lblDOB.AutoSize = true;
-            lblDOB.Location = new Point(359, 195);
+            lblDOB.Location = new Point(12, 347);
             lblDOB.Name = "lblDOB";
             lblDOB.Size = new Size(62, 15);
             lblDOB.TabIndex = 6;
@@ -130,39 +132,37 @@
             // 
             // txtFirstName
             // 
-            txtFirstName.Location = new Point(442, 8);
+            txtFirstName.Location = new Point(104, 283);
             txtFirstName.Name = "txtFirstName";
             txtFirstName.Size = new Size(174, 23);
             txtFirstName.TabIndex = 7;
             // 
             // txtLastName
             // 
-            txtLastName.Location = new Point(442, 54);
+            txtLastName.Location = new Point(104, 312);
             txtLastName.Name = "txtLastName";
             txtLastName.Size = new Size(174, 23);
             txtLastName.TabIndex = 8;
             // 
             // txtSSN
             // 
-            txtSSN.Location = new Point(442, 100);
+            txtSSN.Location = new Point(104, 254);
             txtSSN.Name = "txtSSN";
             txtSSN.Size = new Size(174, 23);
             txtSSN.TabIndex = 9;
-            txtSSN.TextAlign = HorizontalAlignment.Right;
             // 
             // txtId
             // 
-            txtId.Location = new Point(442, 146);
+            txtId.Location = new Point(104, 225);
             txtId.Name = "txtId";
             txtId.ReadOnly = true;
             txtId.Size = new Size(174, 23);
             txtId.TabIndex = 10;
-            txtId.TextAlign = HorizontalAlignment.Right;
             // 
             // dtpDOB
             // 
             dtpDOB.Format = DateTimePickerFormat.Short;
-            dtpDOB.Location = new Point(442, 189);
+            dtpDOB.Location = new Point(104, 341);
             dtpDOB.Name = "dtpDOB";
             dtpDOB.Size = new Size(174, 23);
             dtpDOB.TabIndex = 12;
@@ -175,7 +175,7 @@
             dataGridViewCellStyle1.BackColor = Color.FromArgb(255, 255, 128);
             dgvDeposits.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dgvDeposits.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvDeposits.Location = new Point(12, 333);
+            dgvDeposits.Location = new Point(323, 243);
             dgvDeposits.MultiSelect = false;
             dgvDeposits.Name = "dgvDeposits";
             dgvDeposits.ReadOnly = true;
@@ -188,7 +188,7 @@
             // 
             lblDeposits.AutoSize = true;
             lblDeposits.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblDeposits.Location = new Point(12, 315);
+            lblDeposits.Location = new Point(323, 225);
             lblDeposits.Name = "lblDeposits";
             lblDeposits.Size = new Size(55, 15);
             lblDeposits.TabIndex = 14;
@@ -196,7 +196,7 @@
             // 
             // btnAddDeposit
             // 
-            btnAddDeposit.Location = new Point(410, 489);
+            btnAddDeposit.Location = new Point(721, 399);
             btnAddDeposit.Name = "btnAddDeposit";
             btnAddDeposit.Size = new Size(100, 27);
             btnAddDeposit.TabIndex = 15;
@@ -206,7 +206,7 @@
             // 
             // btnEditDeposit
             // 
-            btnEditDeposit.Location = new Point(516, 489);
+            btnEditDeposit.Location = new Point(827, 399);
             btnEditDeposit.Name = "btnEditDeposit";
             btnEditDeposit.Size = new Size(100, 27);
             btnEditDeposit.TabIndex = 16;
@@ -216,7 +216,7 @@
             // 
             // btnEditWithdrawal
             // 
-            btnEditWithdrawal.Location = new Point(427, 689);
+            btnEditWithdrawal.Location = new Point(827, 588);
             btnEditWithdrawal.Name = "btnEditWithdrawal";
             btnEditWithdrawal.Size = new Size(100, 27);
             btnEditWithdrawal.TabIndex = 20;
@@ -226,7 +226,7 @@
             // 
             // btnAddWithdrawal
             // 
-            btnAddWithdrawal.Location = new Point(321, 689);
+            btnAddWithdrawal.Location = new Point(721, 588);
             btnAddWithdrawal.Name = "btnAddWithdrawal";
             btnAddWithdrawal.Size = new Size(100, 27);
             btnAddWithdrawal.TabIndex = 19;
@@ -238,7 +238,7 @@
             // 
             lblWithdrawals.AutoSize = true;
             lblWithdrawals.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblWithdrawals.Location = new Point(12, 515);
+            lblWithdrawals.Location = new Point(323, 414);
             lblWithdrawals.Name = "lblWithdrawals";
             lblWithdrawals.Size = new Size(76, 15);
             lblWithdrawals.TabIndex = 18;
@@ -249,7 +249,7 @@
             dataGridViewCellStyle2.BackColor = Color.FromArgb(255, 255, 128);
             dgvWithdrawals.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             dgvWithdrawals.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvWithdrawals.Location = new Point(12, 533);
+            dgvWithdrawals.Location = new Point(323, 432);
             dgvWithdrawals.MultiSelect = false;
             dgvWithdrawals.Name = "dgvWithdrawals";
             dgvWithdrawals.ReadOnly = true;
@@ -260,9 +260,9 @@
             // 
             // btnExit
             // 
-            btnExit.Location = new Point(533, 689);
+            btnExit.Location = new Point(827, 621);
             btnExit.Name = "btnExit";
-            btnExit.Size = new Size(83, 27);
+            btnExit.Size = new Size(100, 27);
             btnExit.TabIndex = 21;
             btnExit.Text = "Exit";
             btnExit.UseVisualStyleBackColor = true;
@@ -271,9 +271,9 @@
             // statusStrip1
             // 
             statusStrip1.Items.AddRange(new ToolStripItem[] { lblStatus });
-            statusStrip1.Location = new Point(0, 724);
+            statusStrip1.Location = new Point(0, 721);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(657, 22);
+            statusStrip1.Size = new Size(952, 22);
             statusStrip1.TabIndex = 22;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -285,19 +285,19 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(12, 229);
+            btnSave.Location = new Point(12, 493);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(85, 29);
+            btnSave.Size = new Size(266, 29);
             btnSave.TabIndex = 23;
-            btnSave.Text = "Save";
+            btnSave.Text = "Save Current Customer";
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;
             // 
             // btnClear
             // 
-            btnClear.Location = new Point(103, 229);
+            btnClear.Location = new Point(12, 423);
             btnClear.Name = "btnClear";
-            btnClear.Size = new Size(85, 29);
+            btnClear.Size = new Size(266, 29);
             btnClear.TabIndex = 24;
             btnClear.Text = "Clear";
             btnClear.UseVisualStyleBackColor = true;
@@ -305,27 +305,27 @@
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(194, 229);
+            btnDelete.Location = new Point(12, 528);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(85, 29);
+            btnDelete.Size = new Size(266, 29);
             btnDelete.TabIndex = 25;
-            btnDelete.Text = "Delete";
+            btnDelete.Text = "Delete Current Customer";
             btnDelete.UseVisualStyleBackColor = true;
             btnDelete.Click += btnDelete_Click;
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(103, 264);
+            btnAdd.Location = new Point(12, 458);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(85, 29);
+            btnAdd.Size = new Size(266, 29);
             btnAdd.TabIndex = 26;
-            btnAdd.Text = "Add";
+            btnAdd.Text = "Add New Customer";
             btnAdd.UseVisualStyleBackColor = true;
             btnAdd.Click += btnAdd_Click;
             // 
             // btnWriteToFile
             // 
-            btnWriteToFile.Location = new Point(194, 264);
+            btnWriteToFile.Location = new Point(12, 671);
             btnWriteToFile.Name = "btnWriteToFile";
             btnWriteToFile.Size = new Size(85, 29);
             btnWriteToFile.TabIndex = 27;
@@ -333,11 +333,30 @@
             btnWriteToFile.UseVisualStyleBackColor = true;
             btnWriteToFile.Click += btnWriteToFile_Click;
             // 
+            // txtAge
+            // 
+            txtAge.Location = new Point(104, 370);
+            txtAge.Name = "txtAge";
+            txtAge.ReadOnly = true;
+            txtAge.Size = new Size(174, 23);
+            txtAge.TabIndex = 29;
+            // 
+            // lblAge
+            // 
+            lblAge.AutoSize = true;
+            lblAge.Location = new Point(12, 373);
+            lblAge.Name = "lblAge";
+            lblAge.Size = new Size(31, 15);
+            lblAge.TabIndex = 28;
+            lblAge.Text = "Age:";
+            // 
             // frmBanking
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(657, 746);
+            ClientSize = new Size(952, 743);
+            Controls.Add(txtAge);
+            Controls.Add(lblAge);
             Controls.Add(btnWriteToFile);
             Controls.Add(btnAdd);
             Controls.Add(btnDelete);
@@ -408,5 +427,7 @@
         private Button btnAdd;
         private Button btnWriteToFile;
         private Button btnSave;
+        private TextBox txtAge;
+        private Label lblAge;
     }
 }

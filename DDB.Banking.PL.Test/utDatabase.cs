@@ -51,7 +51,7 @@ namespace DDB.Banking.PL.Test
             SqlCommand command = new SqlCommand(sql);
             DataTable dt = new DataTable();
             dt = db.Select(command);
-            Assert.AreEqual(2, dt.Rows.Count);
+            Assert.AreEqual(3, dt.Rows.Count);
 
         }
 

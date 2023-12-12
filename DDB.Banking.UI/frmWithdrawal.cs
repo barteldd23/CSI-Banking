@@ -1,4 +1,5 @@
-﻿using DDB.Banking.BL.Models;
+﻿using DDB.Banking.BL;
+using DDB.Banking.BL.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -65,9 +66,10 @@ namespace DDB.Banking.UI
                             withdrawal.CustomerId = customer.Id;
                             withdrawal.WithdrawalAmount = withdrawalValue;
                             withdrawal.WithdrawalDate = dtpWithdrawalDate.Value;
-                            withdrawal.WithdrawalId = customer.Withdrawals.Any() ? customer.Withdrawals.Max(d => d.WithdrawalId) + 1 : 1;
+                            withdrawal.WithdrawalId = WithdrawalManager.ReadAll().Any() ? WithdrawalManager.ReadAll().Max(d => d.WithdrawalId) + 1 : 1;
 
                             customer.Withdrawals.Add(withdrawal);
+                            WithdrawalManager.Insert(withdrawal);
                             customer.LastWithdrawalAmount = withdrawal.WithdrawalAmount;
                             customer.LastWithdrawalDate = withdrawal.WithdrawalDate;
                         }
@@ -75,6 +77,7 @@ namespace DDB.Banking.UI
                         {
                             customer.Withdrawals[withdrawalIndex].WithdrawalAmount = withdrawalValue;
                             customer.Withdrawals[withdrawalIndex].WithdrawalDate = dtpWithdrawalDate.Value;
+                            WithdrawalManager.Update(customer.Withdrawals[withdrawalIndex]);
                         }
                     }
                     else
