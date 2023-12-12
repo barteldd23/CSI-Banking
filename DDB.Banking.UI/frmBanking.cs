@@ -439,21 +439,53 @@ namespace DDB.Banking.UI
                 // Only Add if Id is empty, other wise they might mean edit.
                 if (string.IsNullOrEmpty(txtId.Text))
                 {
-                    Customer customer = new Customer();
-                    customer.FirstName = txtFirstName.Text;
-                    customer.LastName = txtLastName.Text;
-                    customer.SSN = txtSSN.Text;
-                    customer.BirthDate = dtpDOB.Value;
-                    customer.Id = customers.Max(x => x.Id) + 1;
+                    if (string.IsNullOrEmpty(txtFirstName.Text.Trim()))
+                    {
+                        txtFirstName.Focus();
+                        txtFirstName.SelectAll();
+                        MessageBox.Show("Must enter a First Name");
+                    }
+                    else
+                    {
+                        if (string.IsNullOrEmpty(txtLastName.Text.Trim()))
+                        {
+                            txtLastName.Focus();
+                            txtLastName.SelectAll();
+                            MessageBox.Show("Must enter a Last Name");
+                        }
+                        else
+                        {
+                            if (string.IsNullOrEmpty(txtSSN.Text.Trim()))
+                            {
+                                txtSSN.Focus();
+                                txtSSN.SelectAll();
+                                MessageBox.Show("Must enter a SSN");
+                            }
+                            else
+                            {
+                                if (dtpDOB.Value.CompareTo(DateTime.Now) >= 0)
+                                {
+                                    dtpDOB.Focus();
+                                    MessageBox.Show("Must enter a valid Birth Date");
+                                }
+                                else
+                                {
+                                    Customer customer = new Customer();
+                                    customer.FirstName = txtFirstName.Text;
+                                    customer.LastName = txtLastName.Text;
+                                    customer.SSN = txtSSN.Text;
+                                    customer.BirthDate = dtpDOB.Value;
+                                    customer.Id = customers.Max(x => x.Id) + 1;
 
-                    customers.Add(customer);
-                    CustomerManager.Insert(customer);
-                    //CustomerManager.WriteXML(customers, settings.CustomerXMLFileName);
+                                    customers.Add(customer);
+                                    CustomerManager.Insert(customer);
+                                    //CustomerManager.WriteXML(customers, settings.CustomerXMLFileName);
 
 
 
-                    string message = "Added " + customer.FullName;
-                    Refresh(message, customers.Count - 1);
+                                    string message = "Added " + customer.FullName;
+                                    Refresh(message, customers.Count - 1);
+                                }
 
                 }
                 else
