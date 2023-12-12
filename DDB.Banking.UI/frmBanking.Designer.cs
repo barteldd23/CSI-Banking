@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
             lbxCustomers = new ListBox();
             lblCustomers = new Label();
             lblFirstName = new Label();
@@ -178,8 +178,8 @@
             dgvDeposits.AllowUserToAddRows = false;
             dgvDeposits.AllowUserToDeleteRows = false;
             dgvDeposits.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(255, 255, 128);
-            dgvDeposits.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.BackColor = Color.FromArgb(255, 255, 128);
+            dgvDeposits.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
             dgvDeposits.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvDeposits.Location = new Point(323, 238);
             dgvDeposits.MultiSelect = false;
@@ -252,8 +252,8 @@
             // 
             // dgvWithdrawals
             // 
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(255, 255, 128);
-            dgvWithdrawals.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.BackColor = Color.FromArgb(255, 255, 128);
+            dgvWithdrawals.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             dgvWithdrawals.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvWithdrawals.Location = new Point(323, 432);
             dgvWithdrawals.MultiSelect = false;
@@ -291,7 +291,7 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(12, 493);
+            btnSave.Location = new Point(12, 467);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(266, 29);
             btnSave.TabIndex = 23;
@@ -301,17 +301,18 @@
             // 
             // btnClear
             // 
-            btnClear.Location = new Point(12, 423);
+            btnClear.Location = new Point(12, 588);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(266, 29);
             btnClear.TabIndex = 24;
             btnClear.Text = "Clear";
             btnClear.UseVisualStyleBackColor = true;
+            btnClear.Visible = false;
             btnClear.Click += btnClear_Click;
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(12, 528);
+            btnDelete.Location = new Point(12, 502);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(266, 29);
             btnDelete.TabIndex = 25;
@@ -321,11 +322,11 @@
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(12, 458);
+            btnAdd.Location = new Point(12, 432);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(266, 29);
             btnAdd.TabIndex = 26;
-            btnAdd.Text = "Add New Customer";
+            btnAdd.Text = "Clear to Create New";
             btnAdd.UseVisualStyleBackColor = true;
             btnAdd.Click += btnAdd_Click;
             // 
@@ -361,25 +362,25 @@
             // 
             dgvCustomers.AllowUserToAddRows = false;
             dgvCustomers.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(255, 255, 128);
-            dgvCustomers.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.BackColor = SystemColors.Control;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            dgvCustomers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.BackColor = Color.FromArgb(255, 255, 128);
+            dgvCustomers.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.BackColor = SystemColors.Control;
+            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle9.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
+            dgvCustomers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             dgvCustomers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.BackColor = SystemColors.Window;
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle5.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
-            dgvCustomers.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.BackColor = SystemColors.Window;
+            dataGridViewCellStyle10.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle10.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.False;
+            dgvCustomers.DefaultCellStyle = dataGridViewCellStyle10;
             dgvCustomers.Location = new Point(12, 29);
             dgvCustomers.MultiSelect = false;
             dgvCustomers.Name = "dgvCustomers";

@@ -146,6 +146,7 @@ namespace DDB.Banking.UI
                     Customer customer = lbxCustomers.SelectedItem as Customer;
                     txtFirstName.Text = customer.FirstName;
                     txtLastName.Text = customer.LastName;
+                    btnAdd.Text = "Clear";
 
                     // Make SSN Display Fancy if its 9 characters long.
                     if (customer.SSN.Length == 9)
@@ -437,8 +438,16 @@ namespace DDB.Banking.UI
                 lblStatus.Text = string.Empty;
 
                 // Only Add if Id is empty, other wise they might mean edit.
-                if (string.IsNullOrEmpty(txtId.Text))
+                if (!string.IsNullOrEmpty(txtId.Text))
                 {
+                    btnAdd.Text = "Add New Customer";
+                    dgvCustomers.ClearSelection();
+                    lbxCustomers.SelectedIndex = -1;
+                }
+                else
+                {
+
+
                     if (string.IsNullOrEmpty(txtFirstName.Text.Trim()))
                     {
                         txtFirstName.Focus();
@@ -486,11 +495,9 @@ namespace DDB.Banking.UI
                                     string message = "Added " + customer.FullName;
                                     Refresh(message, customers.Count - 1);
                                 }
-
-                }
-                else
-                {
-                    MessageBox.Show("Did you mean Save? Clear the screen If you want to Add New Customer");
+                            }
+                        }
+                    }
                 }
             }
             catch (Exception ex)
