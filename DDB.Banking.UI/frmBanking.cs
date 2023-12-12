@@ -84,6 +84,18 @@ namespace DDB.Banking.UI
 
             customers = CustomerManager.ReadDB();
 
+            dgvCustomers.DataSource = null;
+            dgvCustomers.DataSource = customers;
+            dgvCustomers.Columns[1].Visible = false;
+            dgvCustomers.Columns[2].Visible = false;
+            dgvCustomers.Columns[3].Visible = false;
+            dgvCustomers.Columns[4].Visible = false;
+            dgvCustomers.Columns[5].Visible = false;
+            dgvCustomers.Columns[10].Visible = false;
+
+            dgvCustomers.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+
+
             lbxCustomers.DataSource = null;
             lbxCustomers.DataSource = customers;
             lbxCustomers.DisplayMember = "FullName";
@@ -96,6 +108,15 @@ namespace DDB.Banking.UI
             //customers = CustomerManager.ReadXML(settings.CustomerXMLFileName);
 
             customers = CustomerManager.ReadDB();
+
+            dgvCustomers.DataSource = null;
+            dgvCustomers.DataSource = customers;
+            dgvCustomers.Columns[1].Visible = false;
+            dgvCustomers.Columns[2].Visible = false;
+            dgvCustomers.Columns[3].Visible = false;
+            dgvCustomers.Columns[4].Visible = false;
+            dgvCustomers.Columns[5].Visible = false;
+            dgvCustomers.Columns[10].Visible = false;
 
             lbxCustomers.DataSource = null;
             lbxCustomers.DataSource = customers;
@@ -116,6 +137,8 @@ namespace DDB.Banking.UI
             {
                 lblStatus.ForeColor = Color.Blue;
                 lblStatus.Text = string.Empty;
+                dtpDOB.Value = DateTime.Now;
+                txtAge.Text = string.Empty;
 
                 if (lbxCustomers.SelectedIndex >= 0)
                 {
@@ -243,7 +266,7 @@ namespace DDB.Banking.UI
                 frmDeposit.customer = selectedCustomer;
 
                 frmDeposit.ShowDialog();
-                
+
                 RefreshDeposits(selectedCustomer.Deposits);
 
                 //var row = dgvDeposits.SelectedRows[0];
@@ -481,6 +504,11 @@ namespace DDB.Banking.UI
                 lblStatus.ForeColor = Color.Red;
                 lblStatus.Text = ex.Message;
             }
+        }
+
+        private void dgvCustomers_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

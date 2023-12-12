@@ -30,6 +30,9 @@
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             lbxCustomers = new ListBox();
             lblCustomers = new Label();
             lblFirstName = new Label();
@@ -60,19 +63,22 @@
             btnWriteToFile = new Button();
             txtAge = new TextBox();
             lblAge = new Label();
+            dgvCustomers = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dgvDeposits).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvWithdrawals).BeginInit();
             statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvCustomers).BeginInit();
             SuspendLayout();
             // 
             // lbxCustomers
             // 
             lbxCustomers.FormattingEnabled = true;
             lbxCustomers.ItemHeight = 15;
-            lbxCustomers.Location = new Point(12, 29);
+            lbxCustomers.Location = new Point(113, 636);
             lbxCustomers.Name = "lbxCustomers";
-            lbxCustomers.Size = new Size(915, 184);
+            lbxCustomers.Size = new Size(112, 64);
             lbxCustomers.TabIndex = 0;
+            lbxCustomers.Visible = false;
             lbxCustomers.SelectedIndexChanged += lbxCustomers_SelectedIndexChanged;
             // 
             // lblCustomers
@@ -106,7 +112,7 @@
             // lblSSN
             // 
             lblSSN.AutoSize = true;
-            lblSSN.Location = new Point(21, 257);
+            lblSSN.Location = new Point(12, 257);
             lblSSN.Name = "lblSSN";
             lblSSN.Size = new Size(31, 15);
             lblSSN.TabIndex = 4;
@@ -115,7 +121,7 @@
             // lblId
             // 
             lblId.AutoSize = true;
-            lblId.Location = new Point(23, 228);
+            lblId.Location = new Point(12, 228);
             lblId.Name = "lblId";
             lblId.Size = new Size(20, 15);
             lblId.TabIndex = 5;
@@ -175,7 +181,7 @@
             dataGridViewCellStyle1.BackColor = Color.FromArgb(255, 255, 128);
             dgvDeposits.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dgvDeposits.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvDeposits.Location = new Point(323, 243);
+            dgvDeposits.Location = new Point(323, 238);
             dgvDeposits.MultiSelect = false;
             dgvDeposits.Name = "dgvDeposits";
             dgvDeposits.ReadOnly = true;
@@ -331,6 +337,7 @@
             btnWriteToFile.TabIndex = 27;
             btnWriteToFile.Text = "Write To File";
             btnWriteToFile.UseVisualStyleBackColor = true;
+            btnWriteToFile.Visible = false;
             btnWriteToFile.Click += btnWriteToFile_Click;
             // 
             // txtAge
@@ -350,11 +357,45 @@
             lblAge.TabIndex = 28;
             lblAge.Text = "Age:";
             // 
+            // dgvCustomers
+            // 
+            dgvCustomers.AllowUserToAddRows = false;
+            dgvCustomers.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(255, 255, 128);
+            dgvCustomers.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.BackColor = SystemColors.Control;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            dgvCustomers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dgvCustomers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.BackColor = SystemColors.Window;
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle5.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
+            dgvCustomers.DefaultCellStyle = dataGridViewCellStyle5;
+            dgvCustomers.Location = new Point(12, 29);
+            dgvCustomers.MultiSelect = false;
+            dgvCustomers.Name = "dgvCustomers";
+            dgvCustomers.ReadOnly = true;
+            dgvCustomers.RowTemplate.Height = 25;
+            dgvCustomers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvCustomers.Size = new Size(915, 167);
+            dgvCustomers.TabIndex = 30;
+            dgvCustomers.CellContentClick += dgvCustomers_CellContentClick;
+            // 
             // frmBanking
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(952, 743);
+            Controls.Add(dgvCustomers);
             Controls.Add(txtAge);
             Controls.Add(lblAge);
             Controls.Add(btnWriteToFile);
@@ -392,6 +433,7 @@
             ((System.ComponentModel.ISupportInitialize)dgvWithdrawals).EndInit();
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvCustomers).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -429,5 +471,6 @@
         private Button btnSave;
         private TextBox txtAge;
         private Label lblAge;
+        private DataGridView dgvCustomers;
     }
 }
