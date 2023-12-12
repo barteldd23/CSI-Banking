@@ -146,7 +146,7 @@ namespace DDB.Banking.UI
                     Customer customer = lbxCustomers.SelectedItem as Customer;
                     txtFirstName.Text = customer.FirstName;
                     txtLastName.Text = customer.LastName;
-                    btnAdd.Text = "Clear";
+                    btnAdd.Text = "Clear To Create New";
 
                     // Make SSN Display Fancy if its 9 characters long.
                     if (customer.SSN.Length == 9)
